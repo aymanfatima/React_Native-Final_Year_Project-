@@ -3,7 +3,6 @@ import { StyleSheet, Text, View, Image, Linking, TouchableOpacity } from 'react-
 export default function Registration({ navigation }) {
     return (
         <View style={styles.container}>
-
             <View style={{
                 height: 640,
                 width: 360,
@@ -25,7 +24,7 @@ export default function Registration({ navigation }) {
 
 
                 <TouchableOpacity
-                    onPress={() => navigation.navigate('GetStarted')}
+                    onPress={() => navigation.navigate('managerRegister')}
                     style={{
                         backgroundColor: "#f47100", height: 60, width: 300, padding: 10,
                         margin: 20, justifyContent: "center", alignItems: "center", borderRadius: 20

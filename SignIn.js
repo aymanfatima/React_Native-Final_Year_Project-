@@ -3,9 +3,10 @@ import { StyleSheet, Text, View, TouchableOpacity, TextInput, Image } from 'reac
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scrollview';
 import { MaterialIcons } from '@expo/vector-icons';
 import { Entypo } from '@expo/vector-icons';
-import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { MaterialCommunityIcons} from '@expo/vector-icons';
 import ValidationComponent from 'react-native-form-validator';
-import { createStackNavigator } from '@react-navigation/stack';
+import { AntDesign } from '@expo/vector-icons';
+
 
 export default class SignIn extends ValidationComponent {
 
@@ -14,12 +15,15 @@ export default class SignIn extends ValidationComponent {
     this.state = {
       Name: "",
       Email: "",
-      Password: ""
+      Password: "",
+      secureTextEntry: true,
+      IconName: "eye",
     }
   }
 
   validate_field = () => {
-    const { Name, Password, Email } = this.state
+    const { Name, Password, Email } =
+      this.state
     if (Name == "") {
       alert("Kindly Fill Your Name!")
       return false
@@ -35,16 +39,24 @@ export default class SignIn extends ValidationComponent {
     return true
   }
 
+
   making_api_call = () => {
     if (this.validate_field()) {
       alert('Successfully Login')
     }
   }
 
+  onIconPress = () => {
+    let IconName = (this.state.secureTextEntry) ? "eye" : "eye"
+
+    this.setState({
+      secureTextEntry: !this.state.secureTextEntry,
+      IconName: IconName
+    })
+  }
 
 
-  render()
-  {
+  render() {
 
     return (
       <KeyboardAwareScrollView style={{ flex: 1 }}>
@@ -55,9 +67,9 @@ export default class SignIn extends ValidationComponent {
             backgroundColor: "white",
             alignItems: 'center',
             justifyContent: 'center'
-            }}>
+          }}>
 
-            <Image source={{uri: 'https://github.com/aymanfatima/Python-s-Assignment-/blob/master/LOGO%20MAIN%201.png?raw=true'}}
+            <Image source={{ uri: 'https://github.com/aymanfatima/Python-s-Assignment-/blob/master/LOGO%20MAIN%201.png?raw=true' }}
               style={{ width: 200, height: 150, marginBottom: 40, marginTop: -10 }} />
 
 
@@ -82,12 +94,18 @@ export default class SignIn extends ValidationComponent {
 
 
             <MaterialCommunityIcons name="account-key" size={30} color="#f47100" style={styles.icon3} />
-            <TextInput placeholder="Password"
+            <TextInput icon="lock" placeholder="Password"
               style={{
                 height: 50, borderColor: 'black', borderWidth: 2, width: 280,
                 alignItems: "center", paddingLeft: 50, margin: 15, borderRadius: 20
-              }} secureTextEntry={true}
+              }}
+              secureTextEntry={this.state.secureTextEntry} 
+
               onChangeText={(Password) => this.setState({ Password })} value={this.state.Password}/>
+            <TouchableOpacity onPress={this.onIconPress} style={styles.eyess}  >
+            <AntDesign name={this.state.IconName} size={24} color="black" />
+            </TouchableOpacity> 
+
 
 
 
@@ -146,6 +164,14 @@ const styles = StyleSheet.create({
     position: "absolute",
     top: 370,
     right: 250,
+  },
+  eyess: 
+  {
+  padding: 10,
+    margin: 15,
+    position: "absolute",
+    top: 374,
+    right: 30,
   }
 
 });
