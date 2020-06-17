@@ -3,10 +3,9 @@ import { StyleSheet, Text, View, TouchableOpacity, TextInput, Image } from 'reac
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scrollview';
 import { MaterialIcons } from '@expo/vector-icons';
 import { Entypo } from '@expo/vector-icons';
-import { MaterialCommunityIcons} from '@expo/vector-icons';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 import ValidationComponent from 'react-native-form-validator';
 import { AntDesign } from '@expo/vector-icons';
-
 
 export default class SignIn extends ValidationComponent {
 
@@ -18,8 +17,25 @@ export default class SignIn extends ValidationComponent {
       Password: "",
       secureTextEntry: true,
       IconName: "eye",
+      data: [],
+      invalidname: ""
     }
   }
+
+  alphaValid(Name){
+    this.setState({Name: Name})
+    let rjx = /^[a-zA-Z]+$/
+    if(!rjx.test(Name))
+    {
+      this.setState({ invalidname: "You Have Entered Invalid Name"})
+    } 
+    else
+    {
+      this.setState({ invalidname: ""})
+    }
+    return true
+  }
+  
 
   validate_field = () => {
     const { Name, Password, Email } =
@@ -44,7 +60,13 @@ export default class SignIn extends ValidationComponent {
     if (this.validate_field()) {
       alert('Successfully Login')
     }
+    // if (this.alphaValid())
+    // {
+    //   alert('First enter correct data')
+    // }
   }
+
+
 
   onIconPress = () => {
     let IconName = (this.state.secureTextEntry) ? "eye" : "eye"
@@ -56,8 +78,8 @@ export default class SignIn extends ValidationComponent {
   }
 
 
-  render() {
 
+  render() {
     return (
       <KeyboardAwareScrollView style={{ flex: 1 }}>
         <View style={styles.container}>
@@ -73,14 +95,24 @@ export default class SignIn extends ValidationComponent {
               style={{ width: 200, height: 150, marginBottom: 40, marginTop: -10 }} />
 
 
+
             <MaterialIcons name="person" size={30} color="#f47100" style={styles.icon1} />
-            <TextInput placeholder={"Enter Your Name"}
-              onChangeText={(Name) => this.setState({ Name })} value={this.state.Name}
+            <TextInput placeholder={"Enter Your Name"} 
+            maxLength = {15}
+              // onChangeText={(Name) => this.setState({ Name })} value={this.state.Name}
               style={{
                 height: 50, borderColor: 'black', borderWidth: 2,
                 width: 280, alignItems: "center",
                 paddingLeft: 50, margin: 15, borderRadius: 20
-              }} />
+              }} 
+              onChangeText = {(Name) => {this.alphaValid(Name)}}
+              />
+              <Text style={{color:'red', marginTop: -15}}>
+                  {this.state.invalidname}
+                </Text>
+              
+
+
 
 
             <Entypo name="email" size={24} color="#f47100" style={styles.icon2} />
@@ -93,24 +125,23 @@ export default class SignIn extends ValidationComponent {
 
 
 
+
             <MaterialCommunityIcons name="account-key" size={30} color="#f47100" style={styles.icon3} />
             <TextInput icon="lock" placeholder="Password"
               style={{
                 height: 50, borderColor: 'black', borderWidth: 2, width: 280,
                 alignItems: "center", paddingLeft: 50, margin: 15, borderRadius: 20
               }}
-              secureTextEntry={this.state.secureTextEntry} 
-
-              onChangeText={(Password) => this.setState({ Password })} value={this.state.Password}/>
+              secureTextEntry={this.state.secureTextEntry}
+              onChangeText={(Password) => this.setState({ Password })} value={this.state.Password} />
             <TouchableOpacity onPress={this.onIconPress} style={styles.eyess}  >
-            <AntDesign name={this.state.IconName} size={24} color="black" />
-            </TouchableOpacity> 
+              <AntDesign name={this.state.IconName} size={24} color="black" />
+            </TouchableOpacity>
 
-
-
+                
 
             <TouchableOpacity
-              onPress={() => this.making_api_call()}
+              onPress={() => { this.making_api_call()}}
               style={{
                 backgroundColor: "#f47100", height: 50, width: 280, padding: 10, margin: 20, alignItems: "center", borderRadius: 20
               }}>
@@ -165,9 +196,9 @@ const styles = StyleSheet.create({
     top: 370,
     right: 250,
   },
-  eyess: 
+  eyess:
   {
-  padding: 10,
+    padding: 10,
     margin: 15,
     position: "absolute",
     top: 374,
