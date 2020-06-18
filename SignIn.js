@@ -9,6 +9,7 @@ import { AntDesign } from '@expo/vector-icons';
 
 export default class SignIn extends ValidationComponent {
 
+//CONTRUCTOR
   constructor(props) {
     super(props)
     this.state = {
@@ -18,13 +19,15 @@ export default class SignIn extends ValidationComponent {
       secureTextEntry: true,
       IconName: "eye",
       data: [],
-      invalidname: ""
+      invalidname: "",
+      invalidemail: ""
     }
   }
 
+//VALIDATING NAME REJEX
   alphaValid(Name){
     this.setState({Name: Name})
-    let rjx = /^[a-zA-Z]+$/
+    let rjx = /^[a-z A-Z]+$/
     if(!rjx.test(Name))
     {
       this.setState({ invalidname: "You Have Entered Invalid Name"})
@@ -32,11 +35,29 @@ export default class SignIn extends ValidationComponent {
     else
     {
       this.setState({ invalidname: ""})
+      return true
     }
-    return true
   }
   
 
+  //VALIDATING EMAIL REJEX
+  alphaValidEmail(Email){
+    this.setState({Email: Email})
+    let rjx =  /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/
+    if(!rjx.test(Email))
+    {
+      this.setState({ invalidemail: "You Have Entered Invalid Email"})
+    } 
+    else
+    {
+      this.setState({ invalidemail: ""})
+      return true
+    }
+  }
+
+
+ 
+//VALIDATING EMPTY FIELDS
   validate_field = () => {
     const { Name, Password, Email } =
       this.state
@@ -55,19 +76,14 @@ export default class SignIn extends ValidationComponent {
     return true
   }
 
-
+  //ON BUTTON CALLING FUNCTION
   making_api_call = () => {
     if (this.validate_field()) {
       alert('Successfully Login')
     }
-    // if (this.alphaValid())
-    // {
-    //   alert('First enter correct data')
-    // }
   }
 
-
-
+// ON BUTTON PASSWORD EYE ICON
   onIconPress = () => {
     let IconName = (this.state.secureTextEntry) ? "eye" : "eye"
 
@@ -97,37 +113,37 @@ export default class SignIn extends ValidationComponent {
 
 
             <MaterialIcons name="person" size={30} color="#f47100" style={styles.icon1} />
-            <TextInput placeholder={"Enter Your Name"} 
-            maxLength = {15}
-              // onChangeText={(Name) => this.setState({ Name })} value={this.state.Name}
-              style={{
+            <TextInput placeholder={"Enter Your Name"} maxLength = {15}
+            style={{
                 height: 50, borderColor: 'black', borderWidth: 2,
                 width: 280, alignItems: "center",
-                paddingLeft: 50, margin: 15, borderRadius: 20
-              }} 
+                paddingLeft: 50, margin: 15, borderRadius: 20 }} 
               onChangeText = {(Name) => {this.alphaValid(Name)}}
               />
               <Text style={{color:'red', marginTop: -15}}>
-                  {this.state.invalidname}
-                </Text>
+              {this.state.invalidname}
+              </Text>
               
 
 
 
 
             <Entypo name="email" size={24} color="#f47100" style={styles.icon2} />
-            <TextInput placeholder="Your Email"
+            <TextInput placeholder="Enter Your Email"
               style={{
                 height: 50, borderColor: 'black', borderWidth: 2, width: 280,
                 alignItems: "center", paddingLeft: 50, margin: 15, borderRadius: 20
-              }}
-              onChangeText={(Email) => this.setState({ Email })} value={this.state.Email} />
+              }} onChangeText = {(Email) => {this.alphaValidEmail(Email)}}
+              />
+               <Text style={{color:'red', marginTop: -15}}>
+              {this.state.invalidemail}
+              </Text>
 
 
 
 
             <MaterialCommunityIcons name="account-key" size={30} color="#f47100" style={styles.icon3} />
-            <TextInput icon="lock" placeholder="Password"
+            <TextInput icon="lock" placeholder="Enter Your Password"
               style={{
                 height: 50, borderColor: 'black', borderWidth: 2, width: 280,
                 alignItems: "center", paddingLeft: 50, margin: 15, borderRadius: 20
@@ -179,21 +195,21 @@ const styles = StyleSheet.create({
     padding: 10,
     margin: 15,
     position: "absolute",
-    top: 210,
-    right: 250,
+    top: 205,
+    right: 254,
   },
   icon2: {
     padding: 10,
     margin: 15,
     position: "absolute",
-    top: 295,
-    right: 250,
+    top: 293,
+    right: 254,
   },
   icon3: {
     padding: 10,
     margin: 15,
     position: "absolute",
-    top: 370,
+    top: 373,
     right: 250,
   },
   eyess:
@@ -201,7 +217,7 @@ const styles = StyleSheet.create({
     padding: 10,
     margin: 15,
     position: "absolute",
-    top: 374,
+    top: 377,
     right: 30,
   }
 
