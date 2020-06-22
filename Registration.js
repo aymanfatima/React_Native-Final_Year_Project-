@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, Image, Linking, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native';
 export default function Registration({ navigation }) {
     return (
         <View style={styles.container}>
@@ -9,9 +9,9 @@ export default function Registration({ navigation }) {
                 backgroundColor: "white",
                 alignItems: 'center', justifyContent: "center",
             }}>
-                 <Image source={{ uri: 'https://github.com/aymanfatima/Python-s-Assignment-/blob/master/LOGO%20MAIN%201.png?raw=true' }}
-          style={{ width: 200, height: 150}} />
-    
+                <Image source={{ uri: 'https://github.com/aymanfatima/Python-s-Assignment-/blob/master/LOGO%20MAIN%201.png?raw=true' }}
+                    style={{ width: 200, height: 150 }} />
+
                 <TouchableOpacity
                     onPress={() => navigation.navigate('userregister')}
                     style={{
