@@ -24,7 +24,7 @@ export default function Registration({ navigation }) {
 
 
                 <TouchableOpacity
-                    onPress={() => navigation.navigate('managerRegister')}
+                    onPress={() => navigation.navigate('EventManager')}
                     style={{
                         backgroundColor: "#f47100", height: 60, width: 300, padding: 10,
                         margin: 20, justifyContent: "center", alignItems: "center", borderRadius: 20

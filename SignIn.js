@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, TouchableOpacity, TextInput, Image } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity, TextInput, Image, Linking } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scrollview';
 import { MaterialIcons } from '@expo/vector-icons';
 import { Entypo } from '@expo/vector-icons';
@@ -9,7 +9,7 @@ import { AntDesign } from '@expo/vector-icons';
 
 export default class SignIn extends ValidationComponent {
 
-//CONTRUCTOR
+  //CONTRUCTOR
   constructor(props) {
     super(props)
     this.state = {
@@ -24,40 +24,36 @@ export default class SignIn extends ValidationComponent {
     }
   }
 
-//VALIDATING NAME REJEX
-  alphaValid(Name){
-    this.setState({Name: Name})
+  //VALIDATING NAME REJEX
+  alphaValid(Name) {
+    this.setState({ Name: Name })
     let rjx = /^[a-z A-Z]+$/
-    if(!rjx.test(Name))
-    {
-      this.setState({ invalidname: "You Have Entered Invalid Name"})
-    } 
-    else
-    {
-      this.setState({ invalidname: ""})
+    if (!rjx.test(Name)) {
+      this.setState({ invalidname: "You Have Entered Invalid Name" })
+    }
+    else {
+      this.setState({ invalidname: "" })
       return true
     }
   }
-  
+
 
   //VALIDATING EMAIL REJEX
-  alphaValidEmail(Email){
-    this.setState({Email: Email})
-    let rjx =  /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/
-    if(!rjx.test(Email))
-    {
-      this.setState({ invalidemail: "You Have Entered Invalid Email"})
-    } 
-    else
-    {
-      this.setState({ invalidemail: ""})
+  alphaValidEmail(Email) {
+    this.setState({ Email: Email })
+    let rjx = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/
+    if (!rjx.test(Email)) {
+      this.setState({ invalidemail: "You Have Entered Invalid Email" })
+    }
+    else {
+      this.setState({ invalidemail: "" })
       return true
     }
   }
 
 
- 
-//VALIDATING EMPTY FIELDS
+
+  //VALIDATING EMPTY FIELDS
   validate_field = () => {
     const { Name, Password, Email } =
       this.state
@@ -83,7 +79,7 @@ export default class SignIn extends ValidationComponent {
     }
   }
 
-// ON BUTTON PASSWORD EYE ICON
+  // ON BUTTON PASSWORD EYE ICON
   onIconPress = () => {
     let IconName = (this.state.secureTextEntry) ? "eye" : "eye"
 
@@ -100,7 +96,7 @@ export default class SignIn extends ValidationComponent {
       <KeyboardAwareScrollView style={{ flex: 1 }}>
         <View style={styles.container}>
           <View style={{
-            height: 650,
+            height: 620,
             width: 360,
             backgroundColor: "white",
             alignItems: 'center',
@@ -108,22 +104,23 @@ export default class SignIn extends ValidationComponent {
           }}>
 
             <Image source={{ uri: 'https://github.com/aymanfatima/Python-s-Assignment-/blob/master/LOGO%20MAIN%201.png?raw=true' }}
-              style={{ width: 200, height: 150, marginBottom: 40, marginTop: -10 }} />
+              style={{ width: 200, height: 150, marginBottom: 20, marginTop: -10 }} />
 
 
 
             <MaterialIcons name="person" size={30} color="#f47100" style={styles.icon1} />
-            <TextInput placeholder={"Enter Your Name"} maxLength = {15}
-            style={{
+            <TextInput placeholder={"Enter Your Name"} maxLength={15}
+              style={{
                 height: 50, borderColor: 'black', borderWidth: 2,
                 width: 280, alignItems: "center",
-                paddingLeft: 50, margin: 15, borderRadius: 20 }} 
-              onChangeText = {(Name) => {this.alphaValid(Name)}}
-              />
-              <Text style={{color:'red', marginTop: -15}}>
+                paddingLeft: 50, margin: 15, borderRadius: 20
+              }}
+              onChangeText={(Name) => { this.alphaValid(Name) }}
+            />
+            <Text style={{ color: 'red', marginTop: -15 }}>
               {this.state.invalidname}
-              </Text>
-              
+            </Text>
+
 
 
 
@@ -133,11 +130,11 @@ export default class SignIn extends ValidationComponent {
               style={{
                 height: 50, borderColor: 'black', borderWidth: 2, width: 280,
                 alignItems: "center", paddingLeft: 50, margin: 15, borderRadius: 20
-              }} onChangeText = {(Email) => {this.alphaValidEmail(Email)}}
-              />
-               <Text style={{color:'red', marginTop: -15}}>
+              }} onChangeText={(Email) => { this.alphaValidEmail(Email) }}
+            />
+            <Text style={{ color: 'red', marginTop: -15 }}>
               {this.state.invalidemail}
-              </Text>
+            </Text>
 
 
 
@@ -154,15 +151,27 @@ export default class SignIn extends ValidationComponent {
               <AntDesign name={this.state.IconName} size={24} color="black" />
             </TouchableOpacity>
 
-                
+
 
             <TouchableOpacity
-              onPress={() => { this.making_api_call()}}
+              onPress={() => { this.making_api_call() }}
               style={{
                 backgroundColor: "#f47100", height: 50, width: 280, padding: 10, margin: 20, alignItems: "center", borderRadius: 20
               }}>
               <Text style={{ fontSize: 15, color: 'black', padding: 6 }}>
                 Log In</Text>
+            </TouchableOpacity>
+
+
+
+            <TouchableOpacity
+              onPress={() => Linking.openURL('http://google.com')}
+              style={{
+                backgroundColor: "#f47100", height: 50, width: 280, marginBottom: 10, padding: 10, alignItems: "center", borderRadius: 20
+              }}
+            >
+              <Text style={{ fontSize: 15, color: 'black', padding: 6 }}>
+                Log In With Google</Text>
             </TouchableOpacity>
 
 
@@ -173,10 +182,10 @@ export default class SignIn extends ValidationComponent {
                 color: 'black',
                 padding: 10,
                 textAlign: "center",
-                marginBottom: 40,
                 textDecorationLine: "underline"
               }}>
               Not a Member? Register As</Text>
+
 
 
 
@@ -195,21 +204,21 @@ const styles = StyleSheet.create({
     padding: 10,
     margin: 15,
     position: "absolute",
-    top: 205,
+    top: 173,
     right: 254,
   },
   icon2: {
     padding: 10,
     margin: 15,
     position: "absolute",
-    top: 293,
+    top: 260,
     right: 254,
   },
   icon3: {
     padding: 10,
     margin: 15,
     position: "absolute",
-    top: 373,
+    top: 340,
     right: 250,
   },
   eyess:
@@ -217,10 +226,9 @@ const styles = StyleSheet.create({
     padding: 10,
     margin: 15,
     position: "absolute",
-    top: 377,
+    top: 340,
     right: 30,
   }
-
 });
 
 
