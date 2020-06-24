@@ -59,6 +59,35 @@ export default class userregister extends ValidationComponent {
 
 
 
+  //VALIDATING PHONE REJEX
+  alphaValidphone(phone) {
+    this.setState({ phone: phone })
+    let rjx = /^[0-0][3-3]\d{2} \d{7}$/
+    if (!rjx.test(phone)) {
+      this.setState({ invalidphone: "You Have Entered Invalid Cell Number" })
+    }
+    else {
+      this.setState({ invalidphone: "" })
+      return true
+    }
+  }
+
+
+  //VALIDATING CNIC REJEX
+  alphaValidcnic(cnic) {
+    this.setState({ cnic: cnic })
+    let rjx = /^[4-4][2-2][1-1][0-0][1-1] \d{7} \d{1}$/
+    if (!rjx.test(cnic)) {
+      this.setState({ invalidcnic: "You Have Entered Invalid CNIC" })
+    }
+    else {
+      this.setState({ invalidcnic: "" })
+      return true
+    }
+  }
+
+
+
   //VALIDATING EMPTY FIELDS
   validate_field = () => {
     const { Name, Password, Email, cnic, phone } =
@@ -71,25 +100,26 @@ export default class userregister extends ValidationComponent {
       alert("Kindly Fill Your Email!")
       return false
     }
-    else if (Password == "") {
-      alert("Kindly Fill Your Password!")
+    else if (phone == "") {
+      alert("Kindly Fill Your Phone Number!")
       return false
     }
     else if (cnic == "") {
       alert("Kindly Fill Your CNIC!")
       return false
     }
-    else if (phone == "") {
-      alert("Kindly Fill Your Phone Number!")
+    else if (Password == "") {
+      alert("Kindly Fill Your Password!")
       return false
     }
+    
     return true
   }
 
   //ON BUTTON CALLING FUNCTION
   making_api_call = () => {
     if (this.validate_field()) {
-      alert('Successfully Login')
+      alert('Successfully Registered')
     }
   }
 
@@ -159,27 +189,33 @@ export default class userregister extends ValidationComponent {
 
 
             <Feather name="phone" size={24} color="#f47100" style={styles.ImageStyle} />
-            <TextInput placeholder="03XX-XXXXXXX"
+            <TextInput placeholder="03XX XXXXXXX"
               keyboardType={'phone-pad'}
               style={{
                 height: 50, borderColor: 'black', borderWidth: 2,
                 width: 280, alignItems: "center", paddingLeft: 55, margin: 10, borderRadius: 20
-              }} onChangeText={(phone) => this.setState({ phone })} value={this.state.phone}
-              />
+              }} onChangeText={(phone) => { this.alphaValidphone(phone) }}
+            />
+            <Text style={{ color: 'red', marginTop: -13 }}>
+              {this.state.invalidphone}
+            </Text>
 
 
 
 
             <AntDesign name="idcard" size={24} color="#f47100" style={styles.ImageStyless} />
-            <TextInput placeholder="CNIC Number" 
+            <TextInput placeholder="CNIC   (42101 XXXXXXX X)"
               keyboardType={'phone-pad'}
               style={{
                 height: 50, borderColor: 'black',
                 borderWidth: 2, width: 280,
                 alignItems: "center", paddingLeft: 55, margin: 10, borderRadius: 20
               }}
-              onChangeText={(cnic) => this.setState({ cnic })} value={this.state.cnic}
+              onChangeText={(cnic) => { this.alphaValidcnic(cnic) }}
             />
+            <Text style={{ color: 'red', marginTop: -13 }}>
+              {this.state.invalidcnic}
+            </Text>
 
 
 
@@ -197,13 +233,13 @@ export default class userregister extends ValidationComponent {
             </TouchableOpacity>
 
 
-            
+
 
 
 
 
             <TouchableOpacity
-              onPress={() => { this.making_api_call()}}
+              onPress={() => { this.making_api_call() }}
               style={{
                 backgroundColor: "#f47100", height: 50, width: 280, padding: 10, margin: 10, justifyContent: "center", alignItems: "center", borderRadius: 20
               }}>
@@ -212,55 +248,56 @@ export default class userregister extends ValidationComponent {
             </TouchableOpacity>
           </View></View></KeyboardAwareScrollView>
     );
-  }}
+  }
+}
 
-  const styles = StyleSheet.create({
-    container: {
-      alignItems: "center",
-      justifyContent: 'center',
-    },
-    ImageStyles: {
-      padding: 10,
-      margin: 15,
-      position: "absolute",
-      top: 175,
-      right: 255,
-    },
-    ImageStyles1: {
-      padding: 10,
-      margin: 15,
-      position: "absolute",
-      top: 252,
-      right: 255,
-    },
-    ImageStyle: {
-      padding: 10,
-      margin: 15,
-      position: "absolute",
-      top: 327,
-      right: 257,
-    },
-    ImageStyless: {
-      padding: 10,
-      margin: 15,
-      position: "absolute",
-      top: 398,
-      right: 257,
-    },
-    ImageStylesss: {
-      padding: 10,
-      margin: 15,
-      position: "absolute",
-      top: 465,
-      right: 257,
-    },
-    eyess:
+const styles = StyleSheet.create({
+  container: {
+    alignItems: "center",
+    justifyContent: 'center',
+  },
+  ImageStyles: {
+    padding: 10,
+    margin: 15,
+    position: "absolute",
+    top: 170,
+    right: 255,
+  },
+  ImageStyles1: {
+    padding: 10,
+    margin: 15,
+    position: "absolute",
+    top: 245,
+    right: 255,
+  },
+  ImageStyle: {
+    padding: 10,
+    margin: 15,
+    position: "absolute",
+    top: 323,
+    right: 257,
+  },
+  ImageStyless: {
+    padding: 10,
+    margin: 15,
+    position: "absolute",
+    top: 398,
+    right: 257,
+  },
+  ImageStylesss: {
+    padding: 10,
+    margin: 15,
+    position: "absolute",
+    top: 474,
+    right: 257,
+  },
+  eyess:
   {
     padding: 10,
     margin: 15,
     position: "absolute",
-    top: 467,
+    top: 474,
     right: 30,
   }
 
-  });
+});

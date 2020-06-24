@@ -96,7 +96,7 @@ export default class SignIn extends ValidationComponent {
       <KeyboardAwareScrollView style={{ flex: 1 }}>
         <View style={styles.container}>
           <View style={{
-            height: 620,
+            height: 630,
             width: 360,
             backgroundColor: "white",
             alignItems: 'center',
@@ -143,7 +143,7 @@ export default class SignIn extends ValidationComponent {
             <TextInput icon="lock" placeholder="Enter Your Password"
               style={{
                 height: 50, borderColor: 'black', borderWidth: 2, width: 280,
-                alignItems: "center", paddingLeft: 50, margin: 15, borderRadius: 20
+                alignItems: "center", paddingLeft: 50, margin: 10, borderRadius: 20
               }}
               secureTextEntry={this.state.secureTextEntry}
               onChangeText={(Password) => this.setState({ Password })} value={this.state.Password} />
@@ -204,21 +204,21 @@ const styles = StyleSheet.create({
     padding: 10,
     margin: 15,
     position: "absolute",
-    top: 173,
+    top: 180,
     right: 254,
   },
   icon2: {
     padding: 10,
     margin: 15,
     position: "absolute",
-    top: 260,
+    top: 270,
     right: 254,
   },
   icon3: {
     padding: 10,
     margin: 15,
     position: "absolute",
-    top: 340,
+    top: 345,
     right: 250,
   },
   eyess:
