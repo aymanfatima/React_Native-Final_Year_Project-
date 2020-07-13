@@ -11,7 +11,7 @@ export default function GetStarted({ navigation }) {
         height: 640,
         width: 380
       }}>
-	
+       
         <Image source={{ uri: 'https://github.com/aymanfatima/Python-s-Assignment-/blob/master/LOGO%20MAIN%201.png?raw=true' }}
           style={{ width: 200, height: 150, marginTop: 20, marginBottom: 50 }}/>
 

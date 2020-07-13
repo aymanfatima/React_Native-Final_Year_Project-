@@ -9,6 +9,7 @@ import { AntDesign } from '@expo/vector-icons';
 
 export default class SignIn extends ValidationComponent {
 
+
   //CONTRUCTOR
   constructor(props) {
     super(props)
@@ -72,12 +73,15 @@ export default class SignIn extends ValidationComponent {
     return true
   }
 
+
   //ON BUTTON CALLING FUNCTION
   making_api_call = () => {
     if (this.validate_field()) {
       alert('Successfully Login')
     }
   }
+
+
 
   // ON BUTTON PASSWORD EYE ICON
   onIconPress = () => {
@@ -140,13 +144,15 @@ export default class SignIn extends ValidationComponent {
 
 
             <MaterialCommunityIcons name="account-key" size={30} color="#f47100" style={styles.icon3} />
+
             <TextInput icon="lock" placeholder="Enter Your Password"
               style={{
                 height: 50, borderColor: 'black', borderWidth: 2, width: 280,
-                alignItems: "center", paddingLeft: 50, margin: 10, borderRadius: 20
+                alignItems: "center", paddingLeft:55, margin: 10, borderRadius: 20
               }}
               secureTextEntry={this.state.secureTextEntry}
               onChangeText={(Password) => this.setState({ Password })} value={this.state.Password} />
+
             <TouchableOpacity onPress={this.onIconPress} style={styles.eyess}  >
               <AntDesign name={this.state.IconName} size={24} color="black" />
             </TouchableOpacity>
@@ -195,6 +201,8 @@ export default class SignIn extends ValidationComponent {
     );
   }
 }
+
+
 const styles = StyleSheet.create({
   container: {
     alignItems: "center",
@@ -226,7 +234,7 @@ const styles = StyleSheet.create({
     padding: 10,
     margin: 15,
     position: "absolute",
-    top: 340,
+    top: 348,
     right: 30,
   }
 });

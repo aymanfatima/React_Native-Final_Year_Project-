@@ -9,6 +9,7 @@ export default function Registration({ navigation }) {
                 backgroundColor: "white",
                 alignItems: 'center', justifyContent: "center",
             }}>
+
                 <Image source={{ uri: 'https://github.com/aymanfatima/Python-s-Assignment-/blob/master/LOGO%20MAIN%201.png?raw=true' }}
                     style={{ width: 200, height: 150 }} />
 

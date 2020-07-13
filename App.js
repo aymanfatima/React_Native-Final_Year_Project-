@@ -18,8 +18,7 @@ function App() {
           name="GetStarted"
           component={GetStarted}
           options={
-            { headerStyle: { backgroundColor: "#0D47A1" }, headerTintColor: '#fff' }}
-        />
+            { headerStyle: { backgroundColor: "#0D47A1" }, headerTintColor: '#fff' }} />
 
         <Stack.Screen name="SignIn" component={SignIn}
           options={
