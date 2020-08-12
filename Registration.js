@@ -31,7 +31,7 @@ export default function Registration({ navigation }) {
                         margin: 20, justifyContent: "center", alignItems: "center", borderRadius: 20
                     }}>
                     <Text style={{ fontSize: 15, color: 'black', padding: 6 }}>
-                        Event Manager Registration</Text>
+                        Wedding Manager Registration</Text>
                 </TouchableOpacity>
             </View>
         </View>

@@ -34,6 +34,7 @@ export default class EventManager extends ValidationComponent {
       invalidemail: '',
       item1: '',
       item2: '',
+      item3: ''
     };
   }
 
@@ -99,7 +100,7 @@ export default class EventManager extends ValidationComponent {
 
   //VALIDATING EMPTY FIELDS
   validate_field = () => {
-    const { FirstName, LastName, Password, Email, cnic, phone, item1, item2 } = this.state;
+    const { FirstName, LastName, Password, Email, cnic, phone, item1, item2, item3 } = this.state;
     if (FirstName == '') {
       alert('Kindly Fill Your First Name!');
       return false;
@@ -111,6 +112,10 @@ export default class EventManager extends ValidationComponent {
       return false;
     } else if (item2 == '') {
       alert('Kindly Select your City!');
+      return false;
+    }
+    else if (item3 == '') {
+      alert('Kindly Select your Management domain!');
       return false;
     }
     else if (Email == '') {
@@ -134,7 +139,8 @@ export default class EventManager extends ValidationComponent {
   //ON BUTTON CALLING FUNCTION
   making_api_call = () => {
     if (this.validate_field()) {
-      alert('Successfully Login');
+      // alert('Successfully Login');
+      this.props.navigation.navigate('SignIn')
     }
   };
 
@@ -154,7 +160,7 @@ export default class EventManager extends ValidationComponent {
         <View style={styles.container}>
           <View
             style={{
-              height: 820,
+              height: 880,
               width: 400,
               backgroundColor: 'white',
               alignItems: 'center',
@@ -177,11 +183,11 @@ export default class EventManager extends ValidationComponent {
                 fontWeight: 'bold',
               }}
             >
-              Account as an Event Manager{' '}
+              Account as Wedding Event Manager{' '}
             </Text>
 
             <Ionicons name="md-person" size={30} color='#f47100' style={styles.FirstName} />
-            <TextInput
+            <TextInput placeholderTextColor = "black"
               placeholder="First Name"
               maxLength={10}
               style={{
@@ -201,7 +207,7 @@ export default class EventManager extends ValidationComponent {
             </Text>
 
             <Ionicons name="md-person" size={30} color='#f47100' style={styles.LastName} />
-            <TextInput
+            <TextInput placeholderTextColor = "black"
               placeholder="Last Name" 
               maxLength={10}
               style={{
@@ -293,10 +299,35 @@ export default class EventManager extends ValidationComponent {
 
 
 
+<DropDownPicker
+              items={[
+                { label: 'Wedding Event Manager', value: 'Wedding Event Manager' },
+              ]}
+              dropDownStyle={{ marginTop: 5 }}
+              style={{
+                backgroundColor: 'white',
+                borderColor: 'black',
+                borderRadius: 40,
+              }}
+              itemStyle={{
+                alignItems: 'flex-start',
+                fontSize: 25,
+                color: 'white',
+              }}
+              activeLabelStyle={{ color: 'red' }}
+              placeholder="Management Domain"
+              containerStyle={{ height: 50, width: 280, marginTop: 20 }}
+              placeholderStyle={{ fontWeight: 'bold' }}
+              isRequired={true}
+              onChangeItem={item3 => this.setState({ item3 })}
+              value={this.state.item3}
+            />
+
+
 
 
             <MaterialCommunityIcons name="email" size={30} color="#f47100" style={styles.Email} />
-            <TextInput
+            <TextInput placeholderTextColor = "black"
               placeholder="Email Address"
               style={{
                 height: 50,
@@ -320,8 +351,8 @@ export default class EventManager extends ValidationComponent {
 
 
             <Feather name="phone" size={30} color="#f47100" style={styles.phone} />
-            <TextInput
-              placeholder="03XX-XXXXXXX" maxLength={12}
+            <TextInput placeholderTextColor = "black"
+              placeholder="03XX XXXXXXX" maxLength={12}
               keyboardType={'phone-pad'}
               style={{
                 height: 50,
@@ -342,8 +373,8 @@ export default class EventManager extends ValidationComponent {
 
 
             <AntDesign name="idcard" size={30} color="#f47100" style={styles.nic} />
-            <TextInput
-              placeholder="CNIC (42101 XXXXXXX X)" maxLength={15}
+            <TextInput placeholderTextColor = "black"
+              placeholder="CNIC(42101 XXXXXXX X)" maxLength={15}
               keyboardType={'phone-pad'}
               style={{
                 height: 50,
@@ -365,7 +396,7 @@ export default class EventManager extends ValidationComponent {
 
 
             <FontAwesome name="key" size={30} color="#f47100" style={styles.Password} />
-            <TextInput
+            <TextInput placeholderTextColor = "black"
               placeholder="Password"
               style={{
                 height: 50,
@@ -427,49 +458,49 @@ const styles = StyleSheet.create({
     padding: 10,
     margin: 15,
     position: 'absolute',
-    top: 163,
+    top: 158,
     right: 272,
   },
   LastName: {
     padding: 10,
     margin: 15,
     position: 'absolute',
-    top: 240,
+    top: 235,
     right: 272,
   },
   Email: {
     padding: 10,
     margin: 15,
     position: 'absolute',
-    top: 445,
+    top: 510,
     right: 270,
   },
   phone: {
     padding: 10,
     margin: 15,
     position: 'absolute',
-    top: 524,
+    top: 590,
     right: 270,
   },
   nic: {
     padding: 10,
     margin: 15,
     position: 'absolute',
-    top: 600,
+    top: 665,
     right: 269,
   },
   Password: {
     padding: 10,
     margin: 15,
     position: 'absolute',
-    top: 675,
+    top: 738,
     right: 269,
   },
   eyess: {
     padding: 10,
     margin: 15,
     position: 'absolute',
-    top: 680,
+    top: 745,
     right: 46,
   },
 });

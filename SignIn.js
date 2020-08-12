@@ -6,6 +6,7 @@ import { Entypo } from '@expo/vector-icons';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import ValidationComponent from 'react-native-form-validator';
 import { AntDesign } from '@expo/vector-icons';
+// import Googlesign from './Components/Googlesignin';
 
 export default class SignIn extends ValidationComponent {
 
@@ -113,7 +114,7 @@ export default class SignIn extends ValidationComponent {
 
 
             <MaterialIcons name="person" size={30} color="#f47100" style={styles.icon1} />
-            <TextInput placeholder={"Enter Your Name"} maxLength={15}
+            <TextInput placeholderTextColor = "black" placeholder={"Enter Your Name"} maxLength={15} 
               style={{
                 height: 50, borderColor: 'black', borderWidth: 2,
                 width: 280, alignItems: "center",
@@ -130,7 +131,7 @@ export default class SignIn extends ValidationComponent {
 
 
             <Entypo name="email" size={24} color="#f47100" style={styles.icon2} />
-            <TextInput placeholder="Enter Your Email"
+            <TextInput placeholderTextColor = "black" placeholder="Enter Your Email"
               style={{
                 height: 50, borderColor: 'black', borderWidth: 2, width: 280,
                 alignItems: "center", paddingLeft: 50, margin: 15, borderRadius: 20
@@ -145,7 +146,7 @@ export default class SignIn extends ValidationComponent {
 
             <MaterialCommunityIcons name="account-key" size={30} color="#f47100" style={styles.icon3} />
 
-            <TextInput icon="lock" placeholder="Enter Your Password"
+            <TextInput icon="lock" placeholderTextColor = "black" placeholder="Enter Your Password"
               style={{
                 height: 50, borderColor: 'black', borderWidth: 2, width: 280,
                 alignItems: "center", paddingLeft:55, margin: 10, borderRadius: 20
@@ -164,33 +165,22 @@ export default class SignIn extends ValidationComponent {
               style={{
                 backgroundColor: "#f47100", height: 50, width: 280, padding: 10, margin: 20, alignItems: "center", borderRadius: 20
               }}>
-              <Text style={{ fontSize: 15, color: 'black', padding: 6 }}>
+              <Text style={{ fontSize: 17, color: 'black', padding: 6 }}>
                 Log In</Text>
             </TouchableOpacity>
 
 
 
+            {/* <Googlesign /> */}
+
             <TouchableOpacity
-              onPress={() => Linking.openURL('http://google.com')}
+                         onPress={() => this.props.navigation.navigate('Registration')}
               style={{
-                backgroundColor: "#f47100", height: 50, width: 280, marginBottom: 10, padding: 10, alignItems: "center", borderRadius: 20
-              }}
-            >
-              <Text style={{ fontSize: 15, color: 'black', padding: 6 }}>
-                Log In With Google</Text>
-            </TouchableOpacity>
-
-
-            <Text
-              onPress={() => this.props.navigation.navigate('Registration')}
-              style={{
-                fontSize: 15,
-                color: 'black',
-                padding: 10,
-                textAlign: "center",
-                textDecorationLine: "underline"
+                backgroundColor: "#f47100", height: 50, width: 280, padding: 10, margin: 5, alignItems: "center", borderRadius: 20
               }}>
-              Not a Member? Register As</Text>
+              <Text style={{ fontSize: 15, color: 'black', padding: 6 }}>
+                Not a Member? Register as</Text>
+            </TouchableOpacity>
 
 
 
@@ -212,21 +202,21 @@ const styles = StyleSheet.create({
     padding: 10,
     margin: 15,
     position: "absolute",
-    top: 180,
+    top: 200,
     right: 254,
   },
   icon2: {
     padding: 10,
     margin: 15,
     position: "absolute",
-    top: 270,
+    top: 290,
     right: 254,
   },
   icon3: {
     padding: 10,
     margin: 15,
     position: "absolute",
-    top: 345,
+    top: 365,
     right: 250,
   },
   eyess:
@@ -234,7 +224,7 @@ const styles = StyleSheet.create({
     padding: 10,
     margin: 15,
     position: "absolute",
-    top: 348,
+    top: 368,
     right: 30,
   }
 });

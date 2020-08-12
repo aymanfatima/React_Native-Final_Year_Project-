@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, Image, TouchableOpacity, SafeAreaView } from 'react-native';
+import { StyleSheet, Text, View, Image, TouchableOpacity, SafeAreaView, Platform } from 'react-native';
 export default function GetStarted({ navigation }) {
   return (
 
@@ -16,15 +16,7 @@ export default function GetStarted({ navigation }) {
           style={{ width: 200, height: 150, marginTop: 20, marginBottom: 50 }}/>
 
 
-        <Text style={{
-          fontSize: 30,
-          color: 'black',
-          padding: 6,
-          fontWeight: "bold",
-          textShadowColor: "grey",
-          textShadowRadius: 15,
-          textShadowOffset: { width: 3, height: 8 },
-        }}>
+        <Text style={styles.text}>
           Welcome To </Text>
 
         <Text style={{
@@ -39,14 +31,14 @@ export default function GetStarted({ navigation }) {
           "Events For You" </Text>
 
         <Text style={{
-          fontSize: 15,
+          fontSize: 17,
           color: 'grey',
           padding: 10,
           textAlign: "center",
           marginBottom: 40
         }}>
-          Welcome to Events For You. Find an Event Manager easily and fast.
-          Are you an Event Manager? Our App allows you to offer Management
+          Welcome to Events For You. Find Wedding Event Manager easily and fast.
+          Are you the Wedding Event Planner? Our App allows you to offer Management
               Services to Customers</Text>
 
         <TouchableOpacity
@@ -74,6 +66,15 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center"
-
+  },
+  text:
+  {
+    fontSize: 30,
+    color: 'black',
+    padding: 6,
+    fontWeight: "bold",
+    textShadowColor: "grey",
+    textShadowRadius: 15,
+    textShadowOffset: { width: 3, height: 8 },
   }
 });

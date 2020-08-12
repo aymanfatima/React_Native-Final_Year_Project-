@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, TouchableOpacity, TextInput, Image } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity, TextInput, Image, Alert } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scrollview';
 import { Ionicons } from '@expo/vector-icons';
 import { Feather } from '@expo/vector-icons';
@@ -33,6 +33,7 @@ export default class userregister extends ValidationComponent {
         let rjx = /^[a-z A-Z]+$/
         if (!rjx.test(Name)) {
             this.setState({ invalidname: "You Have Entered Invalid Name" })
+            return false
         }
         else {
             this.setState({ invalidname: "" })
@@ -90,7 +91,8 @@ export default class userregister extends ValidationComponent {
         const { Name, Password, Email, cnic, phone } =
             this.state
         if (Name == "") {
-            alert("Kindly Fill Your Name!")
+            Alert.alert('invalid!', 'Kindly Fill Your Name!' , [
+            {text: 'Okay'} ]);
             return false
         }
         else if (Email == "") {
@@ -115,9 +117,12 @@ export default class userregister extends ValidationComponent {
 
     //ON BUTTON CALLING FUNCTION
     making_api_call = () => {
-        if (this.validate_field()) {
-            alert('Successfully Registered')
+        if(this.validate_field())
+        {
+            // alert('Successfully Registered')
+            this.props.navigation.navigate('SignIn')
         }
+   
     }
 
     // ON BUTTON PASSWORD EYE ICON
@@ -159,7 +164,7 @@ export default class userregister extends ValidationComponent {
 
 
                         <Ionicons name="md-person" size={24} color='#f47100' style={styles.ImageStyles} />
-                        <TextInput placeholder="Full Name" maxLength={15}
+                        <TextInput placeholderTextColor="black" placeholder="Full Name" maxLength={15}
                             style={{
                                 height: 50, borderColor: 'black', borderWidth: 2,
                                 width: 280, alignItems: "center",
@@ -173,7 +178,7 @@ export default class userregister extends ValidationComponent {
 
 
                         <MaterialCommunityIcons name="email" size={24} color="#f47100" style={styles.ImageStyles1} />
-                        <TextInput placeholder="Email Address" style={{
+                        <TextInput placeholderTextColor="black" placeholder="Email Address" style={{
                             height: 50, borderColor: 'black', borderWidth: 2,
                             width: 280, alignItems: "center",
                             paddingLeft: 55, margin: 10, borderRadius: 20
@@ -187,7 +192,7 @@ export default class userregister extends ValidationComponent {
 
 
                         <Feather name="phone" size={24} color="#f47100" style={styles.ImageStyle} />
-                        <TextInput placeholder="03XX XXXXXXX" maxLength={12}
+                        <TextInput placeholderTextColor="black" placeholder="03XX XXXXXXX" maxLength={12}
                             keyboardType={'phone-pad'}
                             style={{
                                 height: 50, borderColor: 'black', borderWidth: 2,
@@ -202,7 +207,7 @@ export default class userregister extends ValidationComponent {
 
 
                         <AntDesign name="idcard" size={24} color="#f47100" style={styles.ImageStyless} />
-                        <TextInput placeholder="CNIC   (42101 XXXXXXX X)" maxLength={15}
+                        <TextInput placeholderTextColor="black" placeholder="CNIC (42101 XXXXXXX X)" maxLength={15}
                             keyboardType={'phone-pad'}
                             style={{
                                 height: 50, borderColor: 'black',
@@ -219,7 +224,7 @@ export default class userregister extends ValidationComponent {
 
 
                         <FontAwesome name="key" size={24} color="#f47100" style={styles.ImageStylesss} />
-                        <TextInput placeholder="Password"
+                        <TextInput placeholderTextColor="black" placeholder="Password"
                             style={{
                                 height: 50, borderColor: 'black', borderWidth: 2,
                                 width: 280, alignItems: "center", paddingLeft: 55, margin: 10, borderRadius: 20
@@ -244,6 +249,9 @@ export default class userregister extends ValidationComponent {
                             <Text style={{ fontSize: 15, color: 'black', padding: 6 }}>
                                 Register User Account</Text>
                         </TouchableOpacity>
+
+
+
                     </View></View></KeyboardAwareScrollView>
         );
     }
