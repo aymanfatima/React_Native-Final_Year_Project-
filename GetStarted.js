@@ -20,13 +20,13 @@ export default function GetStarted({ navigation }) {
           Welcome To </Text>
 
         <Text style={{
-          fontSize: 30,
+          fontSize: 32,
           color: 'black',
           padding: 6,
           fontWeight: "bold",
           textShadowColor: "grey",
           textShadowRadius: 15,
-          textShadowOffset: { width: 1, height: 8 },
+          textShadowOffset: { width: 3, height: 8  },
         }}>
           "Events For You" </Text>
 
@@ -35,7 +35,7 @@ export default function GetStarted({ navigation }) {
           color: 'grey',
           padding: 10,
           textAlign: "center",
-          marginBottom: 40
+          marginBottom: 30
         }}>
           Welcome to Events For You. Find Wedding Event Manager easily and fast.
           Are you the Wedding Event Planner? Our App allows you to offer Management
@@ -69,12 +69,13 @@ const styles = StyleSheet.create({
   },
   text:
   {
-    fontSize: 30,
+    fontSize: 32,
     color: 'black',
     padding: 6,
     fontWeight: "bold",
     textShadowColor: "grey",
     textShadowRadius: 15,
     textShadowOffset: { width: 3, height: 8 },
+    fontFamily: 'Shakies'
   }
 });
