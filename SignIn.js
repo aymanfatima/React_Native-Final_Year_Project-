@@ -6,7 +6,7 @@ import { Entypo } from '@expo/vector-icons';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import ValidationComponent from 'react-native-form-validator';
 import { AntDesign } from '@expo/vector-icons';
-// import Googlesign from './Components/Googlesignin';
+
 
 export default class SignIn extends ValidationComponent {
 
@@ -59,11 +59,11 @@ export default class SignIn extends ValidationComponent {
   validate_field = () => {
     const { Name, Password, Email } =
       this.state
-    if (Name == "") {
-      alert("Kindly Fill Your Name!")
-      return false
-    }
-    else if (Email == "") {
+    // if (Name == "") {
+    //   alert("Kindly Fill Your Name!")
+    //   return false
+    // }
+     if (Email == "") {
       alert("Kindly Fill Your Email!")
       return false
     }
@@ -78,7 +78,7 @@ export default class SignIn extends ValidationComponent {
   //ON BUTTON CALLING FUNCTION
   making_api_call = () => {
     if (this.validate_field()) {
-      alert('Successfully Login')
+      {this.props.navigation.navigate('button')}
     }
   }
 

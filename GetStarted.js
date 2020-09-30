@@ -75,7 +75,6 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     textShadowColor: "grey",
     textShadowRadius: 15,
-    textShadowOffset: { width: 3, height: 8 },
-    fontFamily: 'Shakies'
+    textShadowOffset: { width: 3, height: 8 }
   }
 });

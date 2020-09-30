@@ -7,6 +7,7 @@ import SignIn from './SignIn';
 import Registration from './Registration';
 import userregister from './userregister';
 import EventManager from './EventManager';
+import button from "./button";
 
 const Stack = createStackNavigator();
 function App() {
@@ -38,6 +39,11 @@ function App() {
         <Stack.Screen name="EventManager" component={EventManager}
           options={
             { headerStyle: { backgroundColor: "#0D47A1" }, headerTintColor: '#fff' }} />
+
+
+        <Stack.Screen name="button" component={button}
+          options={
+            { headerStyle: { backgroundColor: "#0D47A1" }, headerTintColor: '#fff' }} />      
 
       </Stack.Navigator>
     </NavigationContainer>
