@@ -9,6 +9,21 @@ import userregister from './userregister';
 import EventManager from './EventManager';
 import button from "./button";
 
+import * as firebase from 'firebase';
+
+var firebaseConfig = {
+  apiKey: "AIzaSyCBjviyeXl2rguFhyux1_gZrEt-NgB5vfc",
+  authDomain: "eventmanagerapp-20f33.firebaseapp.com",
+  databaseURL: "https://eventmanagerapp-20f33.firebaseio.com",
+  projectId: "eventmanagerapp-20f33",
+  storageBucket: "eventmanagerapp-20f33.appspot.com",
+};
+
+
+firebase.initializeApp(firebaseConfig);
+
+
+
 const Stack = createStackNavigator();
 function App() {
   return (

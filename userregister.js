@@ -7,6 +7,7 @@ import { AntDesign } from '@expo/vector-icons';
 import { FontAwesome } from '@expo/vector-icons';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import ValidationComponent from 'react-native-form-validator';
+import * as firebase from 'firebase';
 
 export default class userregister extends ValidationComponent {
 
@@ -15,10 +16,10 @@ export default class userregister extends ValidationComponent {
         super(props)
         this.state = {
             Name: "",
-            Email: "",
+            email: "",
             cnic: "",
             phone: "",
-            Password: "",
+            password: "",
             secureTextEntry: true,
             IconName: "eye",
             data: [],
@@ -43,10 +44,10 @@ export default class userregister extends ValidationComponent {
 
 
     //VALIDATING EMAIL REJEX
-    alphaValidEmail(Email) {
-        this.setState({ Email: Email })
+    alphaValidEmail(email) {
+        this.setState({ email: email })
         let rjx = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/
-        if (!rjx.test(Email)) {
+        if (!rjx.test(email)) {
             this.setState({ invalidemail: "You Have Entered Invalid Email" })
         }
         else {
@@ -88,14 +89,14 @@ export default class userregister extends ValidationComponent {
 
     //VALIDATING EMPTY FIELDS
     validate_field = () => {
-        const { Name, Password, Email, cnic, phone } =
+        const { Name, password, email, cnic, phone } =
             this.state
         if (Name == "") {
             Alert.alert('invalid!', 'Kindly Fill Your Name!' , [
             {text: 'Okay'} ]);
             return false
         }
-        else if (Email == "") {
+        else if (email == "") {
             alert("Kindly Fill Your Email!")
             return false
         }
@@ -107,7 +108,7 @@ export default class userregister extends ValidationComponent {
             alert("Kindly Fill Your CNIC!")
             return false
         }
-        else if (Password == "") {
+        else if (password == "") {
             alert("Kindly Fill Your Password!")
             return false
         }
@@ -115,15 +116,21 @@ export default class userregister extends ValidationComponent {
         return true
     }
 
+
     //ON BUTTON CALLING FUNCTION
-    making_api_call = () => {
+    making_api_call = (email, password) => {
         if(this.validate_field())
-        {
-            // alert('Successfully Registered')
-            this.props.navigation.navigate('SignIn')
-        }
-   
-    }
+        {      
+         firebase.auth().createUserWithEmailAndPassword(email, password)
+            .then(data => {
+            console.log('got data ', data);
+            console.log(this.email);
+            })
+            .catch(error => {
+            console.log('got an error ', error);
+            });
+            }
+       }
 
     // ON BUTTON PASSWORD EYE ICON
     onIconPress = () => {
@@ -183,7 +190,7 @@ export default class userregister extends ValidationComponent {
                             width: 280, alignItems: "center",
                             paddingLeft: 55, margin: 10, borderRadius: 20
                         }}
-                            onChangeText={(Email) => { this.alphaValidEmail(Email) }}
+                            onChangeText={(email) => { this.alphaValidEmail(email) }}
                         />
                         <Text style={{ color: 'red', marginTop: -13 }}>
                             {this.state.invalidemail}
@@ -230,7 +237,7 @@ export default class userregister extends ValidationComponent {
                                 width: 280, alignItems: "center", paddingLeft: 55, margin: 10, borderRadius: 20
                             }}
                             secureTextEntry={this.state.secureTextEntry}
-                            onChangeText={(Password) => this.setState({ Password })} value={this.state.Password} />
+                            onChangeText={(password) => this.setState({ password })} value={this.state.password} />
                         <TouchableOpacity onPress={this.onIconPress} style={styles.eyess}  >
                             <AntDesign name={this.state.IconName} size={24} color="black" />
                         </TouchableOpacity>
@@ -242,7 +249,7 @@ export default class userregister extends ValidationComponent {
 
 
                         <TouchableOpacity
-                            onPress={() => { this.making_api_call() }}
+                            onPress={() => { this.making_api_call(this.state.email, this.state.password) }}
                             style={{
                                 backgroundColor: "#f47100", height: 50, width: 280, padding: 10, margin: 10, justifyContent: "center", alignItems: "center", borderRadius: 20
                             }}>

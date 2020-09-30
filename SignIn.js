@@ -1,23 +1,22 @@
 import React from 'react';
-import { StyleSheet, Text, View, TouchableOpacity, TextInput, Image, Linking } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity, TextInput, Image} from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scrollview';
 import { MaterialIcons } from '@expo/vector-icons';
 import { Entypo } from '@expo/vector-icons';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import ValidationComponent from 'react-native-form-validator';
 import { AntDesign } from '@expo/vector-icons';
+import * as firebase from 'firebase';
 
 
 export default class SignIn extends ValidationComponent {
-
-
   //CONTRUCTOR
   constructor(props) {
     super(props)
     this.state = {
       Name: "",
-      Email: "",
-      Password: "",
+      email: "",
+      password: "",
       secureTextEntry: true,
       IconName: "eye",
       data: [],
@@ -41,10 +40,10 @@ export default class SignIn extends ValidationComponent {
 
 
   //VALIDATING EMAIL REJEX
-  alphaValidEmail(Email) {
-    this.setState({ Email: Email })
+  alphaValidEmail(email) {
+    this.setState({ email: email })
     let rjx = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/
-    if (!rjx.test(Email)) {
+    if (!rjx.test(email)) {
       this.setState({ invalidemail: "You Have Entered Invalid Email" })
     }
     else {
@@ -57,17 +56,17 @@ export default class SignIn extends ValidationComponent {
 
   //VALIDATING EMPTY FIELDS
   validate_field = () => {
-    const { Name, Password, Email } =
+    const { Name, password, email } =
       this.state
     // if (Name == "") {
     //   alert("Kindly Fill Your Name!")
     //   return false
     // }
-     if (Email == "") {
+     if (email == "") {
       alert("Kindly Fill Your Email!")
       return false
     }
-    else if (Password == "") {
+    else if (password == "") {
       alert("Kindly Fill Your Password!")
       return false
     }
@@ -76,11 +75,20 @@ export default class SignIn extends ValidationComponent {
 
 
   //ON BUTTON CALLING FUNCTION
-  making_api_call = () => {
-    if (this.validate_field()) {
-      {this.props.navigation.navigate('button')}
-    }
-  }
+  making_api_call = (email, password) => {
+    if(this.validate_field())
+    {      
+     firebase.auth().signInWithEmailAndPassword(email, password)
+        .then(data => {
+        console.log('got data ', data);
+        console.log(this.email);
+        })
+        .catch(error => {
+        console.log('got an error ', error);
+        });
+        }
+   }
+  
 
 
 
@@ -96,7 +104,8 @@ export default class SignIn extends ValidationComponent {
 
 
 
-  render() {
+  render() 
+  {
     return (
       <KeyboardAwareScrollView style={{ flex: 1 }}>
         <View style={styles.container}>
@@ -135,7 +144,7 @@ export default class SignIn extends ValidationComponent {
               style={{
                 height: 50, borderColor: 'black', borderWidth: 2, width: 280,
                 alignItems: "center", paddingLeft: 50, margin: 15, borderRadius: 20
-              }} onChangeText={(Email) => { this.alphaValidEmail(Email) }}
+              }} onChangeText={(email) => { this.alphaValidEmail(email) }}
             />
             <Text style={{ color: 'red', marginTop: -15 }}>
               {this.state.invalidemail}
@@ -152,7 +161,7 @@ export default class SignIn extends ValidationComponent {
                 alignItems: "center", paddingLeft:55, margin: 10, borderRadius: 20
               }}
               secureTextEntry={this.state.secureTextEntry}
-              onChangeText={(Password) => this.setState({ Password })} value={this.state.Password} />
+              onChangeText={(password) => this.setState({ password })} value={this.state.password} />
 
             <TouchableOpacity onPress={this.onIconPress} style={styles.eyess}  >
               <AntDesign name={this.state.IconName} size={24} color="black" />
@@ -161,7 +170,7 @@ export default class SignIn extends ValidationComponent {
 
 
             <TouchableOpacity
-              onPress={() => { this.making_api_call() }}
+              onPress={() => { this.making_api_call(this.state.email, this.state.password) }}
               style={{
                 backgroundColor: "#f47100", height: 50, width: 280, padding: 10, margin: 20, alignItems: "center", borderRadius: 20
               }}>
