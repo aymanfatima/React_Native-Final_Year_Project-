@@ -9,8 +9,9 @@ import { MaterialCommunityIcons } from '@expo/vector-icons';
 import ValidationComponent from 'react-native-form-validator';
 import * as firebase from 'firebase';
 
-export default class userregister extends ValidationComponent {
 
+
+export default class userregister extends ValidationComponent {
     //CONTRUCTOR
     constructor(props) {
         super(props)
@@ -20,13 +21,16 @@ export default class userregister extends ValidationComponent {
             cnic: "",
             phone: "",
             password: "",
+            mydata: [],
             secureTextEntry: true,
             IconName: "eye",
             data: [],
             invalidname: "",
-            invalidemail: ""
+            invalidemail: "", 
         }
     }
+
+
 
     //VALIDATING NAME REJEX
     alphaValid(Name) {
@@ -41,6 +45,8 @@ export default class userregister extends ValidationComponent {
             return true
         }
     }
+
+
 
 
     //VALIDATING EMAIL REJEX
@@ -58,6 +64,8 @@ export default class userregister extends ValidationComponent {
 
 
 
+
+
     //VALIDATING PHONE REJEX
     alphaValidphone(phone) {
         this.setState({ phone: phone })
@@ -72,6 +80,9 @@ export default class userregister extends ValidationComponent {
     }
 
 
+
+
+
     //VALIDATING CNIC REJEX
     alphaValidcnic(cnic) {
         this.setState({ cnic: cnic })
@@ -84,6 +95,8 @@ export default class userregister extends ValidationComponent {
             return true
         }
     }
+
+
 
 
 
@@ -115,6 +128,17 @@ export default class userregister extends ValidationComponent {
 
         return true
     }
+ 
+
+
+
+
+    componentDidMount(){
+        const mydata = firebase.database().ref("Users");
+        mydata.on("value", datasnap => {
+            console.log(datasnap.val())
+        })
+    }
 
 
     //ON BUTTON CALLING FUNCTION
@@ -124,13 +148,26 @@ export default class userregister extends ValidationComponent {
          firebase.auth().createUserWithEmailAndPassword(email, password)
             .then(data => {
             console.log('got data ', data);
-            console.log(this.email);
-            })
+            console.log(this.email); 
+           const users= firebase.database().ref("users");
+            users.push({
+                Name: this.state.Name,
+                email: firebase.auth().currentUser.email,
+                phone: this.state.phone,
+                cnic: this.state.cnic,
+                userId: firebase.auth().currentUser.uid,               
+                time: Date.now()})
+                alert("You have Successfully Registered")
+    })
             .catch(error => {
-            console.log('got an error ', error);
+            alert(error);
             });
-            }
-       }
+        }}
+       
+ 
+
+    
+
 
     // ON BUTTON PASSWORD EYE ICON
     onIconPress = () => {
@@ -144,16 +181,21 @@ export default class userregister extends ValidationComponent {
 
 
 
+
+
     render() {
         return (
             <KeyboardAwareScrollView style={{ flex: 1 }}>
                 <View style={styles.container}>
                     <View style={{
-                        height: 650,
+                        height: 680,
                         width: 360,
                         backgroundColor: "white",
                         alignItems: 'center', justifyContent: "center",
                     }}>
+
+
+
 
                         <Image
                             source={{
@@ -166,11 +208,13 @@ export default class userregister extends ValidationComponent {
                             color: "#0D47A1",
                             padding: 6,
                             fontWeight: "bold"
-                        }}>Account as User Register </Text>
+                        }}>ACCOUNT AS USER REGISTER</Text>
 
 
 
-                        <Ionicons name="md-person" size={24} color='#f47100' style={styles.ImageStyles} />
+
+
+                        <Ionicons name="md-person" size={28} color='#f47100' style={styles.ImageStyles} />
                         <TextInput placeholderTextColor="black" placeholder="Full Name" maxLength={15}
                             style={{
                                 height: 50, borderColor: 'black', borderWidth: 2,
@@ -184,7 +228,9 @@ export default class userregister extends ValidationComponent {
                         </Text>
 
 
-                        <MaterialCommunityIcons name="email" size={24} color="#f47100" style={styles.ImageStyles1} />
+
+
+                        <MaterialCommunityIcons name="email" size={28} color="#f47100" style={styles.ImageStyles1} />
                         <TextInput placeholderTextColor="black" placeholder="Email Address" style={{
                             height: 50, borderColor: 'black', borderWidth: 2,
                             width: 280, alignItems: "center",
@@ -198,7 +244,8 @@ export default class userregister extends ValidationComponent {
 
 
 
-                        <Feather name="phone" size={24} color="#f47100" style={styles.ImageStyle} />
+
+                        <Feather name="phone" size={28} color="#f47100" style={styles.ImageStyle} />
                         <TextInput placeholderTextColor="black" placeholder="03XX XXXXXXX" maxLength={12}
                             keyboardType={'phone-pad'}
                             style={{
@@ -213,7 +260,8 @@ export default class userregister extends ValidationComponent {
 
 
 
-                        <AntDesign name="idcard" size={24} color="#f47100" style={styles.ImageStyless} />
+
+                        <AntDesign name="idcard" size={28} color="#f47100" style={styles.ImageStyless} />
                         <TextInput placeholderTextColor="black" placeholder="CNIC (42101 XXXXXXX X)" maxLength={15}
                             keyboardType={'phone-pad'}
                             style={{
@@ -230,7 +278,8 @@ export default class userregister extends ValidationComponent {
 
 
 
-                        <FontAwesome name="key" size={24} color="#f47100" style={styles.ImageStylesss} />
+
+                        <FontAwesome name="key" size={28} color="#f47100" style={styles.ImageStylesss} />
                         <TextInput placeholderTextColor="black" placeholder="Password"
                             style={{
                                 height: 50, borderColor: 'black', borderWidth: 2,
@@ -241,9 +290,6 @@ export default class userregister extends ValidationComponent {
                         <TouchableOpacity onPress={this.onIconPress} style={styles.eyess}  >
                             <AntDesign name={this.state.IconName} size={24} color="black" />
                         </TouchableOpacity>
-
-
-
 
 
 
@@ -259,6 +305,18 @@ export default class userregister extends ValidationComponent {
 
 
 
+                        <TouchableOpacity
+                            onPress={() => this.props.navigation.navigate('SignIn')}
+                            style={{
+                                backgroundColor: "#f47100", height: 50, width: 280, padding: 10, margin: 0, justifyContent: "center", alignItems: "center", borderRadius: 20
+                            }}>
+                            <Text style={{ fontSize: 15, color: 'black', padding: 6 }}>
+                              Jump To Sign In!</Text>
+                        </TouchableOpacity>
+
+
+
+
                     </View></View></KeyboardAwareScrollView>
         );
     }
@@ -267,49 +325,49 @@ export default class userregister extends ValidationComponent {
 const styles = StyleSheet.create({
     container: {
         alignItems: "center",
-        justifyContent: 'center',
+        justifyContent: 'center'
     },
     ImageStyles: {
         padding: 10,
         margin: 15,
         position: "absolute",
-        top: 170,
+        top: 160,
         right: 255,
     },
     ImageStyles1: {
         padding: 10,
         margin: 15,
         position: "absolute",
-        top: 245,
-        right: 255,
+        top: 235,
+        right: 250,
     },
     ImageStyle: {
         padding: 10,
         margin: 15,
         position: "absolute",
-        top: 323,
-        right: 257,
+        top: 313,
+        right: 250,
     },
     ImageStyless: {
         padding: 10,
         margin: 15,
         position: "absolute",
-        top: 398,
-        right: 257,
+        top: 388,
+        right: 250,
     },
     ImageStylesss: {
         padding: 10,
         margin: 15,
         position: "absolute",
-        top: 474,
-        right: 257,
+        top: 464,
+        right: 250,
     },
     eyess:
     {
         padding: 10,
         margin: 15,
         position: "absolute",
-        top: 474,
+        top: 466,
         right: 30,
     }
 

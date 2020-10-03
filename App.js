@@ -58,7 +58,7 @@ function App() {
 
         <Stack.Screen name="button" component={button}
           options={
-            { headerStyle: { backgroundColor: "#0D47A1" }, headerTintColor: '#fff' }} />      
+            { headerStyle: { backgroundColor: "#0D47A1" }, headerTintColor: '#fff' }} />           
 
       </Stack.Navigator>
     </NavigationContainer>

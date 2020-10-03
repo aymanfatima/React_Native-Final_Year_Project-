@@ -1,7 +1,6 @@
 import React from 'react';
 import { StyleSheet, Text, View, TouchableOpacity, TextInput, Image} from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scrollview';
-import { MaterialIcons } from '@expo/vector-icons';
 import { Entypo } from '@expo/vector-icons';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import ValidationComponent from 'react-native-form-validator';
@@ -14,7 +13,6 @@ export default class SignIn extends ValidationComponent {
   constructor(props) {
     super(props)
     this.state = {
-      Name: "",
       email: "",
       password: "",
       secureTextEntry: true,
@@ -22,19 +20,6 @@ export default class SignIn extends ValidationComponent {
       data: [],
       invalidname: "",
       invalidemail: ""
-    }
-  }
-
-  //VALIDATING NAME REJEX
-  alphaValid(Name) {
-    this.setState({ Name: Name })
-    let rjx = /^[a-z A-Z]+$/
-    if (!rjx.test(Name)) {
-      this.setState({ invalidname: "You Have Entered Invalid Name" })
-    }
-    else {
-      this.setState({ invalidname: "" })
-      return true
     }
   }
 
@@ -56,12 +41,8 @@ export default class SignIn extends ValidationComponent {
 
   //VALIDATING EMPTY FIELDS
   validate_field = () => {
-    const { Name, password, email } =
+    const {password, email } =
       this.state
-    // if (Name == "") {
-    //   alert("Kindly Fill Your Name!")
-    //   return false
-    // }
      if (email == "") {
       alert("Kindly Fill Your Email!")
       return false
@@ -74,6 +55,9 @@ export default class SignIn extends ValidationComponent {
   }
 
 
+
+
+
   //ON BUTTON CALLING FUNCTION
   making_api_call = (email, password) => {
     if(this.validate_field())
@@ -82,10 +66,13 @@ export default class SignIn extends ValidationComponent {
         .then(data => {
         console.log('got data ', data);
         console.log(this.email);
+        alert("You have Successfully Login")
         })
+
+
         .catch(error => {
         console.log('got an error ', error);
-        });
+        alert(error);});
         }
    }
   
@@ -118,28 +105,11 @@ export default class SignIn extends ValidationComponent {
           }}>
 
             <Image source={{ uri: 'https://github.com/aymanfatima/Python-s-Assignment-/blob/master/LOGO%20MAIN%201.png?raw=true' }}
-              style={{ width: 200, height: 150, marginBottom: 20, marginTop: -10 }} />
+              style={{ width: 200, height: 150, marginBottom: 100, marginTop: -10 }} />
 
 
-
-            <MaterialIcons name="person" size={30} color="#f47100" style={styles.icon1} />
-            <TextInput placeholderTextColor = "black" placeholder={"Enter Your Name"} maxLength={15} 
-              style={{
-                height: 50, borderColor: 'black', borderWidth: 2,
-                width: 280, alignItems: "center",
-                paddingLeft: 50, margin: 15, borderRadius: 20
-              }}
-              onChangeText={(Name) => { this.alphaValid(Name) }}
-            />
-            <Text style={{ color: 'red', marginTop: -15 }}>
-              {this.state.invalidname}
-            </Text>
-
-
-
-
-
-            <Entypo name="email" size={24} color="#f47100" style={styles.icon2} />
+        
+            <Entypo name="email" size={28} color="#f47100" style={styles.icon2} />
             <TextInput placeholderTextColor = "black" placeholder="Enter Your Email"
               style={{
                 height: 50, borderColor: 'black', borderWidth: 2, width: 280,
@@ -154,7 +124,6 @@ export default class SignIn extends ValidationComponent {
 
 
             <MaterialCommunityIcons name="account-key" size={30} color="#f47100" style={styles.icon3} />
-
             <TextInput icon="lock" placeholderTextColor = "black" placeholder="Enter Your Password"
               style={{
                 height: 50, borderColor: 'black', borderWidth: 2, width: 280,
@@ -179,8 +148,6 @@ export default class SignIn extends ValidationComponent {
             </TouchableOpacity>
 
 
-
-            {/* <Googlesign /> */}
 
             <TouchableOpacity
                          onPress={() => this.props.navigation.navigate('Registration')}
@@ -207,26 +174,19 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: 'center',
   },
-  icon1: {
-    padding: 10,
-    margin: 15,
-    position: "absolute",
-    top: 200,
-    right: 254,
-  },
   icon2: {
     padding: 10,
     margin: 15,
     position: "absolute",
-    top: 290,
+    top: 285,
     right: 254,
   },
   icon3: {
     padding: 10,
     margin: 15,
     position: "absolute",
-    top: 365,
-    right: 250,
+    top: 360,
+    right: 253,
   },
   eyess:
   {
