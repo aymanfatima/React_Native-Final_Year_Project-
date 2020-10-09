@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, TouchableOpacity, TextInput, Image, Alert } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity, TextInput, Image, Alert, ListItem, List } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scrollview';
 import { Ionicons } from '@expo/vector-icons';
 import { Feather } from '@expo/vector-icons';
@@ -20,13 +20,14 @@ export default class userregister extends ValidationComponent {
             email: "",
             cnic: "",
             phone: "",
+            data: [],
             password: "",
-            mydata: [],
             secureTextEntry: true,
             IconName: "eye",
-            data: [],
+            mydata: [],
             invalidname: "",
             invalidemail: "", 
+            users: []
         }
     }
 
@@ -130,39 +131,48 @@ export default class userregister extends ValidationComponent {
     }
  
 
-
+    // componentDidMount(){
+    //     const mydata = firebase.database().ref("users");
+    //     mydata.on("value", datasnap => {
+    //     this.setState({mydata: Object.values(datasnap.val())})
+    //     })
+    // }
 
 
     componentDidMount(){
-        const mydata = firebase.database().ref("Users");
-        mydata.on("value", datasnap => {
-            console.log(datasnap.val())
+    let mydata = firebase.database().ref("users");
+    mydata.on("value", snapshot => {
+    let data = snapshot.val();
+    let users = Object.values(data);
+    this.setState({users});
         })
     }
 
 
+
     //ON BUTTON CALLING FUNCTION
     making_api_call = (email, password) => {
-        if(this.validate_field())
-        {      
-         firebase.auth().createUserWithEmailAndPassword(email, password)
-            .then(data => {
-            console.log('got data ', data);
-            console.log(this.email); 
-           const users= firebase.database().ref("users");
-            users.push({
-                Name: this.state.Name,
-                email: firebase.auth().currentUser.email,
-                phone: this.state.phone,
-                cnic: this.state.cnic,
-                userId: firebase.auth().currentUser.uid,               
-                time: Date.now()})
-                alert("You have Successfully Registered")
+    if(this.validate_field())
+    {      
+    firebase.auth().createUserWithEmailAndPassword(email, password)
+    .then(data => {
+        console.log('got data ', data);
+        console.log(this.email); 
+        const users= firebase.database().ref("users");
+        users.push({
+        Name: this.state.Name,
+        email: firebase.auth().currentUser.email,
+        phone: this.state.phone,
+        cnic: this.state.cnic,
+        userId: firebase.auth().currentUser.uid,               
+        time: Date.now()})
+        alert("You have Successfully Registered")
     })
-            .catch(error => {
-            alert(error);
-            });
-        }}
+        .catch(error => {
+        alert(error);
+        });
+        }
+    }    
        
  
 
@@ -179,11 +189,26 @@ export default class userregister extends ValidationComponent {
         })
     }
 
+        // dataretrieval = () =>{
+        //     console.log(this.state)
+        //     const mydata = this.state.mydata.map(data => {
+        //         return(
+        //             <List>
+        //             <ListItem>
+        //                 <Text>{data.Name}</Text>
+        //                 <Text>{data.email}</Text>
+        //                 <Text>{data.phone}</Text>
+        //                 <Text>{data.cnic}</Text>
+        //             </ListItem>
+        //             </List>
+        //          )
+        //     })
+        // }
 
 
 
-
-    render() {
+    render()
+     {
         return (
             <KeyboardAwareScrollView style={{ flex: 1 }}>
                 <View style={styles.container}>
@@ -306,17 +331,13 @@ export default class userregister extends ValidationComponent {
 
 
                         <TouchableOpacity
-                            onPress={() => this.props.navigation.navigate('SignIn')}
+                            onPress={() => this.props.navigation.navigate('User_Dashboard')}
                             style={{
                                 backgroundColor: "#f47100", height: 50, width: 280, padding: 10, margin: 0, justifyContent: "center", alignItems: "center", borderRadius: 20
                             }}>
                             <Text style={{ fontSize: 15, color: 'black', padding: 6 }}>
                               Jump To Sign In!</Text>
                         </TouchableOpacity>
-
-
-
-
                     </View></View></KeyboardAwareScrollView>
         );
     }

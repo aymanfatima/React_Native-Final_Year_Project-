@@ -75,6 +75,7 @@ export default class SignIn extends ValidationComponent {
         alert(error);});
         }
    }
+    
   
 
 

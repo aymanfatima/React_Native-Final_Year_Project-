@@ -8,6 +8,7 @@ import Registration from './Registration';
 import userregister from './userregister';
 import EventManager from './EventManager';
 import button from "./button";
+import User_Dashboard from "./User_Dashboard";
 
 import * as firebase from 'firebase';
 
@@ -18,7 +19,6 @@ var firebaseConfig = {
   projectId: "eventmanagerapp-20f33",
   storageBucket: "eventmanagerapp-20f33.appspot.com",
 };
-
 
 firebase.initializeApp(firebaseConfig);
 
@@ -58,7 +58,12 @@ function App() {
 
         <Stack.Screen name="button" component={button}
           options={
-            { headerStyle: { backgroundColor: "#0D47A1" }, headerTintColor: '#fff' }} />           
+            { headerStyle: { backgroundColor: "#0D47A1" }, headerTintColor: '#fff' }} />     
+
+
+<Stack.Screen name="User_Dashboard" component={User_Dashboard}
+          options={
+            { headerStyle: { backgroundColor: "#0D47A1" }, headerTintColor: '#fff' }} />                 
 
       </Stack.Navigator>
     </NavigationContainer>
