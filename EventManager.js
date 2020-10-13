@@ -138,10 +138,9 @@ export default class EventManager extends ValidationComponent {
 
   //ON BUTTON CALLING FUNCTION
   making_api_call = () => {
-    if (this.validate_field()) {
-      // alert('Successfully Login');
-      this.props.navigation.navigate('SignIn')
-    }
+    // if (this.validate_field()) 
+    // {
+      {this.props.navigation.navigate('Eventmanagertext')}
   };
 
   // ON BUTTON PASSWORD EYE ICON
@@ -436,7 +435,7 @@ export default class EventManager extends ValidationComponent {
                 borderRadius: 20,
               }}>
               <Text style={{ fontSize: 15, color: 'black', padding: 6 }}>
-                Register E.Manager Account
+                Proceed 1 of 3
               </Text>
             </TouchableOpacity>
 

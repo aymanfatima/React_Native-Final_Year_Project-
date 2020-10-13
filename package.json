@@ -13,7 +13,7 @@
     "@react-navigation/native": "^5.1.7",
     "@react-navigation/stack": "^5.2.14",
     "expo": "~37.0.3",
-    "firebase": "7.9.0",
+    "firebase": "^7.9.0",
     "native-base": "^2.13.12",
     "react": "~16.9.0",
     "react-dom": "~16.9.0",
@@ -34,7 +34,8 @@
     "react-native-safe-area-context": "0.7.3",
     "react-native-screens": "~2.2.0",
     "react-native-text-input-mask": "^2.0.0",
-    "react-native-web": "~0.11.7"
+    "react-native-web": "~0.11.7",
+    "expo-image-picker": "~8.1.0"
   },
   "devDependencies": {
     "babel-preset-expo": "~8.1.0",
