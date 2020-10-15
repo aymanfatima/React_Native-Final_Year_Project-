@@ -15,7 +15,6 @@ import * as firebase from 'firebase';
 
 
 
-
 var firebaseConfig = {
   apiKey: "AIzaSyCBjviyeXl2rguFhyux1_gZrEt-NgB5vfc",
   authDomain: "eventmanagerapp-20f33.firebaseapp.com",
