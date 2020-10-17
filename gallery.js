@@ -4,10 +4,16 @@ import * as ImagePicker from 'expo-image-picker';
 import UserPermissions from './utilities/UserPermission';
 import Fire from './Fire';
 
-export default function App() {
+
+
+
+
+export default function Gallery() { 
   const [image, setImage] = useState(null)
   const [modal, setModal] = useState(false);
 
+  
+  
 
 
   useEffect(() => {
@@ -16,8 +22,9 @@ export default function App() {
 
 
   const upload = () => {
-    Fire.shared.addPhoto(image).then(()=>{
+    Fire.shared.addPhoto(image,).then(()=>{
       setImage(null)
+
 
     })
     .catch(err=>{

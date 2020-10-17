@@ -2,9 +2,10 @@ import React from 'react';
 import { StyleSheet, Text, View} from 'react-native';
 import propTypes from 'prop-types';
 
+
 export default class Fetchdatamanager extends React.Component{
     static propTypes = {
-        users: propTypes.array.isRequired
+        manager: propTypes.array.isRequired,
     };
 
 
@@ -12,18 +13,26 @@ export default class Fetchdatamanager extends React.Component{
     {
         return(
             <View style={styles.container}>
-                {this.props.users.map((users, index) => {
+
+
+
+
+                    {this.props.manager.map((manager, index) =>{
                     return(
-                        <View key={index}>
-                                <Text>{users.Name}</Text>
-                                <Text>{users.email}</Text>
-                                <Text>{users.phone}</Text>
-                        </View>
-                    )
-                }
-                
-                )}
+                    <View key={index}>
+                    <Text>{manager.email}</Text> 
+                    <Text>{manager.text}</Text> 
+                    </View>
+                    )})}             
+                            
+        
             </View>
+
+
+                
+
+
+
         )
     }
 }

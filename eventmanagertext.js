@@ -6,9 +6,57 @@ import {
   TouchableOpacity,
   TextInput
 } from 'react-native';
+import * as firebase from 'firebase';
+
 
 
 export default class Eventmanagertext extends React.Component{
+  constructor(props) {
+    super(props);
+    this.state = {
+      text: "",
+      newdata: [],
+      mydata: [],
+      manager: []
+    };
+  }
+
+
+
+  validate_field = () => {
+    const { text } = this.state;
+    if (text == '') {
+      alert('Kindly Fill Your Introduction');
+      return false;
+    }
+    return true;
+  };
+
+
+
+
+  componentDidMount(){
+    let mydata = firebase.database().ref("manager");
+    mydata.on("value", snapshot => {
+    let newdata = snapshot.val();
+    let manager = Object.values(newdata);
+    this.setState({manager});
+        })
+    }
+
+
+    making_api_call = () => {
+      if(this.validate_field())
+      {      
+          const manager= firebase.database().ref("manager");
+          manager.push({
+          text: this.state.text,              
+          time: Date.now()
+    })
+          {this.props.navigation.navigate('Gallery')}
+    }}
+
+
     render()
     {
         return(
@@ -38,6 +86,9 @@ export default class Eventmanagertext extends React.Component{
                     placeholderTextColor="grey"
                     numberOfLines={10}
                     multiline={true}
+                    onChangeText={text => 
+                    this.setState({ text })}
+                    value={this.state.text}
                     />
                 </View>
                 <View>
@@ -48,7 +99,9 @@ export default class Eventmanagertext extends React.Component{
 
                 <View>
                 <TouchableOpacity 
-                onPress={() => this.props.navigation.navigate('Gallery')}
+                onPress={() => {
+                  this.making_api_call();
+                }}
                 style={{
                 backgroundColor: '#f47100',
                 height: 50,

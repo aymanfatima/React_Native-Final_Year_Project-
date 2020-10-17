@@ -15,28 +15,35 @@ import { FontAwesome } from '@expo/vector-icons';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import ValidationComponent from 'react-native-form-validator';
 import DropDownPicker from 'react-native-dropdown-picker';
+import * as firebase from 'firebase';
 
 export default class EventManager extends ValidationComponent {
   //CONTRUCTOR
   constructor(props) {
-    super(props);
+    super(props)
     this.state = {
-      FirstName: '',
-      LastName: '',
-      Email: '',
-      cnic: '',
-      phone: '',
-      Password: '',
+      FirstName: "",
+      LastName: "",
+      email: "",
+      cnic: "",
+      phone: "",
+      password: "",
       secureTextEntry: true,
       IconName: 'eye',
+      invalidname: "",
+      invalidemail: "",
       data: [],
-      invalidname: '',
-      invalidemail: '',
-      item1: '',
-      item2: '',
-      item3: ''
-    };
+      item1: "",
+      item2: "",
+      item3: "",
+      newdata: [],
+      mydata: [],
+      manager: []
+    }
   }
+
+
+
 
   //VALIDATING NAME REJEX
   alphaValid(FirstName) {
@@ -50,6 +57,9 @@ export default class EventManager extends ValidationComponent {
     }
   }
 
+
+
+
   //VALIDATING NAME REJEX
   alphaValidsecondname(LastName) {
     this.setState({ LastName: LastName });
@@ -62,17 +72,22 @@ export default class EventManager extends ValidationComponent {
     }
   }
 
+
+
   //VALIDATING EMAIL REJEX
-  alphaValidEmail(Email) {
-    this.setState({ Email: Email });
+  alphaValidEmail(email) {
+    this.setState({ email: email });
     let rjx = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
-    if (!rjx.test(Email)) {
+    if (!rjx.test(email)) {
       this.setState({ invalidemail: 'You Have Entered Invalid Email' });
     } else {
       this.setState({ invalidemail: '' });
       return true;
     }
   }
+
+
+
 
   //VALIDATING PHONE REJEX
   alphaValidphone(phone) {
@@ -86,6 +101,9 @@ export default class EventManager extends ValidationComponent {
     }
   }
 
+
+
+
   //VALIDATING CNIC REJEX
   alphaValidcnic(cnic) {
     this.setState({ cnic: cnic });
@@ -98,50 +116,98 @@ export default class EventManager extends ValidationComponent {
     }
   }
 
+
+
   //VALIDATING EMPTY FIELDS
   validate_field = () => {
-    const { FirstName, LastName, Password, Email, cnic, phone, item1, item2, item3 } = this.state;
-    if (FirstName == '') {
-      alert('Kindly Fill Your First Name!');
-      return false;
-    } else if (LastName == '') {
-      alert('Kindly Fill Your Last Name!');
-      return false;
-    } else if (item1 == '') {
-      alert('Kindly Select your Experience!');
-      return false;
-    } else if (item2 == '') {
-      alert('Kindly Select your City!');
-      return false;
-    }
-    else if (item3 == '') {
-      alert('Kindly Select your Management domain!');
-      return false;
-    }
-    else if (Email == '') {
-      alert('Kindly Fill Your Email!');
-      return false;
-    }
-    else if (phone == '') {
-      alert('Kindly Fill Your Phone Number!');
-      return false;
-    }
-    else if (cnic == '') {
-      alert('Kindly Fill Your CNIC!');
-      return false;
-    } else if (Password == '') {
-      alert('Kindly Fill Your Password!');
-      return false;
-    }
+    // const { FirstName, LastName, password, email, cnic, phone, item1, item2, item3 } = this.state;
+    // if (FirstName == '') {
+    //   alert('Kindly Fill Your First Name!');
+    //   return false;
+    // } else if (LastName == '') {
+    //   alert('Kindly Fill Your Last Name!');
+    //   return false;
+    // } else if (item1 == '') {
+    //   alert('Kindly Select your Experience!');
+    //   return false;
+    // } else if (item2 == '') {
+    //   alert('Kindly Select your City!');
+    //   return false;
+    // }
+    // else if (item3 == '') {
+    //   alert('Kindly Select your Management domain!');
+    //   return false;
+    // }
+    // else if (email == '') {
+    //   alert('Kindly Fill Your Email!');
+    //   return false;
+    // }
+    // else if (phone == '') {
+    //   alert('Kindly Fill Your Phone Number!');
+    //   return false;
+    // }
+    // else if (cnic == '') {
+    //   alert('Kindly Fill Your CNIC!');
+    //   return false;
+    // } else if (password == '') {
+    //   alert('Kindly Fill Your Password!');
+    //   return false;
+    // }
     return true;
   };
 
-  //ON BUTTON CALLING FUNCTION
-  making_api_call = () => {
-    // if (this.validate_field()) 
-    // {
-      {this.props.navigation.navigate('Eventmanagertext')}
-  };
+
+
+
+
+
+
+  componentDidMount(){
+    let mydata = firebase.database().ref("manager");
+    mydata.on("value", snapshot => {
+    let newdata = snapshot.val();
+    let manager = Object.values(newdata);
+    this.setState({manager});
+        })
+    }
+
+
+
+
+
+    //ON BUTTON CALLING FUNCTION
+    making_api_call = (email, password) => {
+    if(this.validate_field())
+    {      
+    firebase.auth().createUserWithEmailAndPassword(email, password)
+    .then(newdata => {
+        console.log('got data ', newdata);
+        console.log(this.email); 
+        const manager= firebase.database().ref("manager");
+        manager.push({
+        FirstName: this.state.FirstName,
+        LastName: this.state.LastName,
+        item1: this.state.item1,
+        item2: this.state.item2,
+        item3: this.state.item3,
+        email: firebase.auth().currentUser.email,
+        phone: this.state.phone,
+        cnic: this.state.cnic,
+        userId: firebase.auth().currentUser.uid,               
+        time: Date.now()})
+        alert("You have Successfully Registered")
+        {this.props.navigation.navigate('Eventmanagertext')}
+    })
+        .catch(error => {
+        alert(error);
+        });
+       }
+    }    
+
+
+
+
+
 
   // ON BUTTON PASSWORD EYE ICON
   onIconPress = () => {
@@ -152,6 +218,10 @@ export default class EventManager extends ValidationComponent {
       IconName: IconName,
     });
   };
+
+
+
+
 
   render() {
     return (
@@ -182,7 +252,7 @@ export default class EventManager extends ValidationComponent {
                 fontWeight: 'bold',
               }}
             >
-              Account as Wedding Event Manager{' '}
+              Account as Wedding Event Manager
             </Text>
 
             <Ionicons name="md-person" size={30} color='#f47100' style={styles.FirstName} />
@@ -257,8 +327,6 @@ export default class EventManager extends ValidationComponent {
               containerStyle={{ height: 50, width: 280, marginTop: 10 }}
               placeholderStyle={{ fontWeight: 'bold' }}
               isRequired={true}
-              onChangeItem={item1 => this.setState({ item1 })}
-              value={this.state.item1}
             />
 
 
@@ -325,7 +393,7 @@ export default class EventManager extends ValidationComponent {
 
 
 
-            <MaterialCommunityIcons name="email" size={30} color="#f47100" style={styles.Email} />
+            <MaterialCommunityIcons name="email" size={30} color="#f47100" style={styles.email} />
             <TextInput placeholderTextColor = "black"
               placeholder="Email Address"
               style={{
@@ -338,8 +406,8 @@ export default class EventManager extends ValidationComponent {
                 margin: 10,
                 borderRadius: 20,
               }}
-              onChangeText={Email => {
-                this.alphaValidEmail(Email);
+              onChangeText={email => {
+                this.alphaValidEmail(email);
               }}
             />
             <Text style={{ color: 'red', marginTop: -13 }}>
@@ -394,7 +462,7 @@ export default class EventManager extends ValidationComponent {
 
 
 
-            <FontAwesome name="key" size={30} color="#f47100" style={styles.Password} />
+            <FontAwesome name="key" size={30} color="#f47100" style={styles.password} />
             <TextInput placeholderTextColor = "black"
               placeholder="Password"
               style={{
@@ -408,9 +476,7 @@ export default class EventManager extends ValidationComponent {
                 borderRadius: 20,
               }}
               secureTextEntry={this.state.secureTextEntry}
-              onChangeText={Password => this.setState({ Password })}
-              value={this.state.Password}
-            />
+                onChangeText={(password) => this.setState({ password })} value={this.state.password} />
             <TouchableOpacity onPress={this.onIconPress} style={styles.eyess}  >
               <AntDesign name={this.state.IconName} size={24} color="black" />
             </TouchableOpacity>
@@ -421,9 +487,7 @@ export default class EventManager extends ValidationComponent {
 
 
             <TouchableOpacity
-              onPress={() => {
-                this.making_api_call();
-              }}
+               onPress={() => { this.making_api_call(this.state.email, this.state.password) }}
               style={{
                 backgroundColor: '#f47100',
                 height: 50,
@@ -467,7 +531,7 @@ const styles = StyleSheet.create({
     top: 235,
     right: 272,
   },
-  Email: {
+  email: {
     padding: 10,
     margin: 15,
     position: 'absolute',
@@ -488,7 +552,7 @@ const styles = StyleSheet.create({
     top: 665,
     right: 269,
   },
-  Password: {
+  password: {
     padding: 10,
     margin: 15,
     position: 'absolute',
@@ -503,3 +567,9 @@ const styles = StyleSheet.create({
     right: 46,
   },
 });
+
+
+
+
+
+

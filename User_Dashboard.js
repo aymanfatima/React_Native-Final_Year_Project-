@@ -7,46 +7,57 @@ import Fetchdatamanager from './fetchdatamanager';
 
 export default class User_Dashboard extends React.Component{
     static propTypes = {
-        users: propTypes.array.isRequired
+        manager: propTypes.array.isRequired,
     };
 
 
 
-    constructor(props) {
-        super(props)
-        this.state = {
-            Name: "",
-            email: "",
-            cnic: "",
-            phone: "",
-            data: [],
-            mydata: [],
-            users:[],
+
+  constructor(props) {
+      super(props)
+      this.state = {
+      FirstName: "",
+      LastName: "",
+      email: "",
+      cnic: "",
+      phone: "",
+      password: "",
+      data: [],
+      item1: "",
+      item2: "",
+      item3: "",
+
+
+      newdata: [],
+      mydata: [],
+      manager: [], 
         }}
 
 
 
         componentDidMount(){
-            let mydata = firebase.database().ref("users");
-            mydata.on("value", snapshot => {
-            let data = snapshot.val();
-            let users = Object.values(data);
-            this.setState({users});
+                let mydata = firebase.database().ref("manager");
+                mydata.on("value", snapshot => {
+                let newdata = snapshot.val();
+                let manager = Object.values(newdata);
+                this.setState({manager});
                 })
             }
 
 
 
 
-    render()
+       render()
     {
         return(
         <View style={styles.container}>
 
-         {this.state.users.length > 0 
+         {this.state.manager.length > 0
          ? 
          (
-        <Fetchdatamanager users={this.state.users} />
+                <Fetchdatamanager 
+                manager={this.state.manager} 
+                />
         )
         :(
         <Text>No data found</Text>

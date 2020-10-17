@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, TouchableOpacity, TextInput, Image, Alert, ListItem, List } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity, TextInput, Image, Alert} from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scrollview';
 import { Ionicons } from '@expo/vector-icons';
 import { Feather } from '@expo/vector-icons';
@@ -131,13 +131,7 @@ export default class userregister extends ValidationComponent {
     }
  
 
-    // componentDidMount(){
-    //     const mydata = firebase.database().ref("users");
-    //     mydata.on("value", datasnap => {
-    //     this.setState({mydata: Object.values(datasnap.val())})
-    //     })
-    // }
-
+    
 
     componentDidMount(){
     let mydata = firebase.database().ref("users");
@@ -188,24 +182,7 @@ export default class userregister extends ValidationComponent {
             IconName: IconName
         })
     }
-
-        // dataretrieval = () =>{
-        //     console.log(this.state)
-        //     const mydata = this.state.mydata.map(data => {
-        //         return(
-        //             <List>
-        //             <ListItem>
-        //                 <Text>{data.Name}</Text>
-        //                 <Text>{data.email}</Text>
-        //                 <Text>{data.phone}</Text>
-        //                 <Text>{data.cnic}</Text>
-        //             </ListItem>
-        //             </List>
-        //          )
-        //     })
-        // }
-
-
+      
 
     render()
      {
