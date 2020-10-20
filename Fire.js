@@ -17,7 +17,6 @@ class Fire {
             const file = await response.blob()
             let upload = firebase.storage().ref(path).put(file)
             upload.on('state_changed', snapshot => {
-
             }, err => {
                 rej(err)
             }, async () => {
@@ -35,7 +34,6 @@ class Fire {
             firebase.database().ref('manager').push({
                 image:remoteUri,
                 timestamp:this.timestamp,    
-            
             })
             .then(ref=>{
                 res(ref)

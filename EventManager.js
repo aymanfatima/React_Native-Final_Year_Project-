@@ -120,39 +120,39 @@ export default class EventManager extends ValidationComponent {
 
   //VALIDATING EMPTY FIELDS
   validate_field = () => {
-    // const { FirstName, LastName, password, email, cnic, phone, item1, item2, item3 } = this.state;
-    // if (FirstName == '') {
-    //   alert('Kindly Fill Your First Name!');
-    //   return false;
-    // } else if (LastName == '') {
-    //   alert('Kindly Fill Your Last Name!');
-    //   return false;
-    // } else if (item1 == '') {
-    //   alert('Kindly Select your Experience!');
-    //   return false;
-    // } else if (item2 == '') {
-    //   alert('Kindly Select your City!');
-    //   return false;
-    // }
-    // else if (item3 == '') {
-    //   alert('Kindly Select your Management domain!');
-    //   return false;
-    // }
-    // else if (email == '') {
-    //   alert('Kindly Fill Your Email!');
-    //   return false;
-    // }
-    // else if (phone == '') {
-    //   alert('Kindly Fill Your Phone Number!');
-    //   return false;
-    // }
-    // else if (cnic == '') {
-    //   alert('Kindly Fill Your CNIC!');
-    //   return false;
-    // } else if (password == '') {
-    //   alert('Kindly Fill Your Password!');
-    //   return false;
-    // }
+    const { FirstName, LastName, password, email, cnic, phone, item1, item2, item3 } = this.state;
+    if (FirstName == '') {
+      alert('Kindly Fill Your First Name!');
+      return false;
+    } else if (LastName == '') {
+      alert('Kindly Fill Your Last Name!');
+      return false;
+    } else if (item1 == '') {
+      alert('Kindly Select your Experience!');
+      return false;
+    } else if (item2 == '') {
+      alert('Kindly Select your City!');
+      return false;
+    }
+    else if (item3 == '') {
+      alert('Kindly Select your Management domain!');
+      return false;
+    }
+    else if (email == '') {
+      alert('Kindly Fill Your Email!');
+      return false;
+    }
+    else if (phone == '') {
+      alert('Kindly Fill Your Phone Number!');
+      return false;
+    }
+    else if (cnic == '') {
+      alert('Kindly Fill Your CNIC!');
+      return false;
+    } else if (password == '') {
+      alert('Kindly Fill Your Password!');
+      return false;
+    }
     return true;
   };
 
@@ -162,7 +162,7 @@ export default class EventManager extends ValidationComponent {
 
 
 
-  componentDidMount(){
+    componentDidMount(){
     let mydata = firebase.database().ref("manager");
     mydata.on("value", snapshot => {
     let newdata = snapshot.val();
@@ -175,7 +175,7 @@ export default class EventManager extends ValidationComponent {
 
 
 
-    //ON BUTTON CALLING FUNCTION
+  //   //ON BUTTON CALLING FUNCTION
     making_api_call = (email, password) => {
     if(this.validate_field())
     {      
@@ -195,9 +195,9 @@ export default class EventManager extends ValidationComponent {
         cnic: this.state.cnic,
         userId: firebase.auth().currentUser.uid,               
         time: Date.now()})
-        alert("You have Successfully Registered")
         {this.props.navigation.navigate('Eventmanagertext')}
-    })
+    }
+    )
         .catch(error => {
         alert(error);
         });
@@ -327,6 +327,8 @@ export default class EventManager extends ValidationComponent {
               containerStyle={{ height: 50, width: 280, marginTop: 10 }}
               placeholderStyle={{ fontWeight: 'bold' }}
               isRequired={true}
+              onChangeItem={item => this.setState({
+                item1: item.value })}
             />
 
 
@@ -360,8 +362,8 @@ export default class EventManager extends ValidationComponent {
               containerStyle={{ height: 50, width: 280, marginTop: 20 }}
               placeholderStyle={{ fontWeight: 'bold' }}
               isRequired={true}
-              onChangeItem={item2 => this.setState({ item2 })}
-              value={this.state.item2}
+              onChangeItem={item => this.setState({
+                item2: item.value })}
             />
 
 
@@ -386,8 +388,8 @@ export default class EventManager extends ValidationComponent {
               containerStyle={{ height: 50, width: 280, marginTop: 20 }}
               placeholderStyle={{ fontWeight: 'bold' }}
               isRequired={true}
-              onChangeItem={item3 => this.setState({ item3 })}
-              value={this.state.item3}
+              onChangeItem={item => this.setState({
+                item3: item.value })}
             />
 
 

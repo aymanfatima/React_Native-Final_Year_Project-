@@ -4,15 +4,9 @@ import * as ImagePicker from 'expo-image-picker';
 import UserPermissions from './utilities/UserPermission';
 import Fire from './Fire';
 
-
-
-
-
-export default function Gallery() { 
+export default function Gallery({navigation}) { 
   const [image, setImage] = useState(null)
   const [modal, setModal] = useState(false);
-
-  
   
 
 
@@ -21,17 +15,22 @@ export default function Gallery() {
   }, [])
 
 
+
+
+
   const upload = () => {
     Fire.shared.addPhoto(image,).then(()=>{
       setImage(null)
-
-
+      alert("You have Successfully made your Profile")
     })
     .catch(err=>{
       alert(err.message)
     })
   }
   
+
+
+
   const pickImage = async () => {
     let result = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.All,
@@ -47,8 +46,39 @@ export default function Gallery() {
     }
   };
 
+
+
+  const pickfromcamera = async () => {
+    let result = await ImagePicker.launchCameraAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.Images,
+      allowsEditing: true,
+      aspect: [2,2],
+      quality: 1
+    });
+
+    console.log(result);
+
+    if (!result.cancelled) {
+      setImage(result.uri)
+    }
+  };
+
+
+
+
   return (
     <SafeAreaView  style={styles.container} >
+      
+      <TouchableOpacity
+      onPress={() => navigation.navigate('SignIn')}
+      style={{
+      backgroundColor: "#f47100", height: 35, width: '100%', padding: 10, margintop: 100, justifyContent: "center", alignItems: "center"
+      }}>
+      <Text style={{ fontSize: 15, color: 'white', padding: 6 }}>
+      Jump To Sign In!</Text>
+     </TouchableOpacity>
+
+
     <View style = {{marginTop: 10}}>
            <Text
             style={{
@@ -84,7 +114,7 @@ export default function Gallery() {
    </View>
 
 
-   <View style={{marginHorizontal:20, marginTop:35, height:170, width: 250}}>
+   <View style={{marginHorizontal:20, marginTop:10, height:170, width: 250}}>
     {image === null? 
     <Text style={{textAlign: 'center'}}>No image is selected</Text>: 
     <View>
@@ -112,33 +142,46 @@ export default function Gallery() {
 
           
        <Modal
-       animationType="slide"
-       transparent={true}
-       visible={modal}
-       onRequestClose={() => setModal(false)}
-       >
-           <View style={styles.modalview}>
-           <View style={styles.modalbutton}>
-           <TouchableOpacity 
-           onPress={() => {pickImage()}}
-           style={{
-            backgroundColor: '#0D47A1',
-            height: 50,
-            width: 300,
-            padding: 10,
-            justifyContent: 'center',
-            alignItems: "center",
-            marginBottom: 20,
-            marginTop: 10}}>
-           <Text style={{ fontSize: 15, color: 'white', padding: 6 }}>
-               Select From Gallery
-           </Text>
-           </TouchableOpacity>
+    animationType="slide"
+    transparent={true}
+    visible={modal}
+    onRequestClose={() => setModal(false)}
+    >
+        <View style={styles.modalview}>
+        <View style={styles.modalbutton}>
+        <TouchableOpacity 
+        onPress={() => pickImage()}
+        style={{
+        backgroundColor: '#0D47A1',
+        height: 50,
+        width: 170,
+        padding: 10,
+        alignSelf: "center",
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginLeft: 20,
+        marginTop: 20}}>
+        <Text style={{ fontSize: 15, color: 'white', padding: 6 }}>
+            Image From Gallery
+        </Text>
+        </TouchableOpacity>
 
 
-          
-           </View>
-
+        <TouchableOpacity 
+        onPress={() => pickfromcamera()}
+        style={{
+        backgroundColor: '#0D47A1',
+        height: 50,
+        width: 170,
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginRight: 20,
+        marginTop: 20}}>
+        <Text style={{ fontSize: 15, color: 'white', padding: 6 }}>
+           Image From Camera
+        </Text>
+        </TouchableOpacity>
+        </View>
 
            <View style={styles.backbutton}>
            <TouchableOpacity 
@@ -146,12 +189,12 @@ export default function Gallery() {
            style={{
            backgroundColor: '#0D47A1',
            height: 50,
-           width: 300,
+           width: 190,
            padding: 10,
            justifyContent: 'center',
            alignItems: 'center',
-           marginBottom: 10,
-           marginTop: 7}}>
+           marginBottom: 5,
+           marginTop: 10}}>
            <Text style={{ fontSize: 15, color: 'white', padding: 6 }}>
             Back to Gallery Screen
            </Text>
@@ -162,7 +205,6 @@ export default function Gallery() {
 
 
        </Modal>
-
 
 
    
@@ -176,6 +218,8 @@ const styles = StyleSheet.create({
       justifyContent: 'center',
     },
     modalbutton:{
+        flexDirection: "row",
+        justifyContent: "space-between", 
         alignItems: "center",
     },
     backbutton:{
@@ -183,7 +227,7 @@ const styles = StyleSheet.create({
     },
     modalview:{
         position: "absolute",
-        bottom: 1,
+        bottom: 0.5,
         width: "100%",
         backgroundColor: "#dce2f5"
     }
