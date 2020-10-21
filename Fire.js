@@ -28,21 +28,21 @@ class Fire {
     }
 
 
-    addPhoto = async (localUri) => {
-        const remoteUri = await this.uploadPhotoAsync(localUri)
-        return new Promise((res,rej)=>{
-            firebase.database().ref('manager').push({
-                image:remoteUri,
-                timestamp:this.timestamp,    
-            })
-            .then(ref=>{
-                res(ref)
-            })
-            .catch(err=>{
-                rej(err)
-            })
-        })
-    }
+    // addPhoto = async (localUri) => {
+    //     const remoteUri = await this.uploadPhotoAsync(localUri)
+    //     return new Promise((res,rej)=>{
+    //         firebase.database().ref('manager').push({
+    //             image:remoteUri,
+    //             timestamp:this.timestamp,    
+    //         })
+    //         .then(ref=>{
+    //             res(ref)
+    //         })
+    //         .catch(err=>{
+    //             rej(err)
+    //         })
+    //     })
+    // }
     get timestamp() {
         return Date.now()
     }

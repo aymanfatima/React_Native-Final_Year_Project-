@@ -26,11 +26,15 @@ export default class User_Dashboard extends React.Component{
       item1: "",
       item2: "",
       item3: "",
+      setModal: 'false',
 
 
       newdata: [],
       mydata: [],
       manager: [], 
+      image: "",
+      remoteUri: "",
+      upload:""
         }}
 
 

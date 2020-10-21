@@ -36,6 +36,7 @@ export default class EventManager extends ValidationComponent {
       item1: "",
       item2: "",
       item3: "",
+      text: "",
       newdata: [],
       mydata: [],
       manager: []
@@ -120,7 +121,7 @@ export default class EventManager extends ValidationComponent {
 
   //VALIDATING EMPTY FIELDS
   validate_field = () => {
-    const { FirstName, LastName, password, email, cnic, phone, item1, item2, item3 } = this.state;
+    const { text, FirstName, LastName, password, email, cnic, phone, item1, item2, item3 } = this.state;
     if (FirstName == '') {
       alert('Kindly Fill Your First Name!');
       return false;
@@ -151,6 +152,10 @@ export default class EventManager extends ValidationComponent {
       return false;
     } else if (password == '') {
       alert('Kindly Fill Your Password!');
+      return false;
+    }
+    if (text == '') {
+      alert('Kindly Fill Your Introduction');
       return false;
     }
     return true;
@@ -193,9 +198,10 @@ export default class EventManager extends ValidationComponent {
         email: firebase.auth().currentUser.email,
         phone: this.state.phone,
         cnic: this.state.cnic,
+        text: this.state.text,  
         userId: firebase.auth().currentUser.uid,               
         time: Date.now()})
-        {this.props.navigation.navigate('Eventmanagertext')}
+        {this.props.navigation.navigate('Gallery')}
     }
     )
         .catch(error => {
@@ -229,7 +235,7 @@ export default class EventManager extends ValidationComponent {
         <View style={styles.container}>
           <View
             style={{
-              height: 880,
+              height: 1320,
               width: 400,
               backgroundColor: 'white',
               alignItems: 'center',
@@ -240,8 +246,21 @@ export default class EventManager extends ValidationComponent {
               source={{
                 uri: 'https://cdn3.iconfinder.com/data/icons/user-roles/64/users-18-128.png',
               }}
-              style={{ width: 100, height: 100, marginTop: 30 }}
+              style={{ width: 100, height: 100, marginTop: -30 }}
             />
+            <Text
+              style={{
+                alignItems: 'center',
+                justifyContent: 'center',
+                fontSize: 20,
+                color:'black',
+                padding: 6,
+                fontWeight: 'bold',
+              }}
+            >
+              ACCOUNT AS WEDDING MANAGER
+            </Text>
+
             <Text
               style={{
                 alignItems: 'center',
@@ -252,8 +271,9 @@ export default class EventManager extends ValidationComponent {
                 fontWeight: 'bold',
               }}
             >
-              Account as Wedding Event Manager
+              Personal Details
             </Text>
+
 
             <Ionicons name="md-person" size={30} color='#f47100' style={styles.FirstName} />
             <TextInput placeholderTextColor = "black"
@@ -296,104 +316,6 @@ export default class EventManager extends ValidationComponent {
             <Text style={{ color: 'red', marginTop: -13 }}>
               {this.state.invalidlastname}
             </Text>
-
-
-            <DropDownPicker
-              items={[
-                { label: 'newbie', value: 'newbie' },
-                {
-                  label: '1 year Experience (Intermediate)',
-                  value: '1 year Experience (Intermediate)',
-                },
-                { label: '2 years Experience', value: '2 years Experience' },
-                {
-                  label: 'Expert in Managemnent',
-                  value: 'Expert in Managemnent',
-                },
-              ]}
-              dropDownStyle={{ marginTop: 5 }}
-              style={{
-                backgroundColor: 'white',
-                borderRadius: 20,
-                borderColor: 'black',
-              }}
-              itemStyle={{
-                alignItems: 'flex-start',
-                fontSize: 25,
-                color: 'white',
-              }}
-              activeLabelStyle={{ color: 'red' }}
-              placeholder="Your Experience"
-              containerStyle={{ height: 50, width: 280, marginTop: 10 }}
-              placeholderStyle={{ fontWeight: 'bold' }}
-              isRequired={true}
-              onChangeItem={item => this.setState({
-                item1: item.value })}
-            />
-
-
-
-
-            <DropDownPicker
-              items={[
-                { label: 'karachi', value: 'karachi' },
-                { label: 'Islamabad', value: 'Islamabad' },
-                { label: 'Lahore', value: 'Lahore' },
-                { label: 'Bhawalpur', value: 'Bhawalpur' },
-                { label: 'Quetta', value: 'Quetta' },
-                { label: 'Faisalabad', value: 'Faisalabad' },
-                { label: 'Multan', value: 'Multan' },
-                { label: 'Rawalpindi', value: 'Rawalpindi' },
-                { label: 'Hyderabad', value: 'Hyderabad' },
-              ]}
-              dropDownStyle={{ marginTop: 5 }}
-              style={{
-                backgroundColor: 'white',
-                borderColor: 'black',
-                borderRadius: 40,
-              }}
-              itemStyle={{
-                alignItems: 'flex-start',
-                fontSize: 25,
-                color: 'white',
-              }}
-              activeLabelStyle={{ color: 'red' }}
-              placeholder="Your City"
-              containerStyle={{ height: 50, width: 280, marginTop: 20 }}
-              placeholderStyle={{ fontWeight: 'bold' }}
-              isRequired={true}
-              onChangeItem={item => this.setState({
-                item2: item.value })}
-            />
-
-
-
-<DropDownPicker
-              items={[
-                { label: 'Wedding Event Manager', value: 'Wedding Event Manager' },
-              ]}
-              dropDownStyle={{ marginTop: 5 }}
-              style={{
-                backgroundColor: 'white',
-                borderColor: 'black',
-                borderRadius: 40,
-              }}
-              itemStyle={{
-                alignItems: 'flex-start',
-                fontSize: 25,
-                color: 'white',
-              }}
-              activeLabelStyle={{ color: 'red' }}
-              placeholder="Management Domain"
-              containerStyle={{ height: 50, width: 280, marginTop: 20 }}
-              placeholderStyle={{ fontWeight: 'bold' }}
-              isRequired={true}
-              onChangeItem={item => this.setState({
-                item3: item.value })}
-            />
-
-
-
 
             <MaterialCommunityIcons name="email" size={30} color="#f47100" style={styles.email} />
             <TextInput placeholderTextColor = "black"
@@ -483,7 +405,148 @@ export default class EventManager extends ValidationComponent {
               <AntDesign name={this.state.IconName} size={24} color="black" />
             </TouchableOpacity>
 
+  
+            <Text
+              style={{
+                alignItems: 'center',
+                justifyContent: 'center',
+                fontSize: 20,
+                color: '#0D47A1',
+                padding: 6,
+                fontWeight: 'bold',
+              }}
+            >
+              Working Experience
+            </Text>
 
+            <DropDownPicker
+              items={[
+                { label: 'newbie', value: 'newbie' },
+                {
+                  label: '1 year Experience (Intermediate)',
+                  value: '1 year Experience (Intermediate)',
+                },
+                { label: '2 years Experience', value: '2 years Experience' },
+                {
+                  label: 'Expert in Managemnent',
+                  value: 'Expert in Managemnent',
+                },
+              ]}
+              dropDownStyle={{ marginTop: 5 }}
+              style={{
+                backgroundColor: 'white',
+                borderRadius: 20,
+                borderColor: 'black',
+              }}
+              itemStyle={{
+                alignItems: 'flex-start',
+                fontSize: 25,
+                color: 'white',
+              }}
+              activeLabelStyle={{ color: 'red' }}
+              placeholder="Your Experience"
+              containerStyle={{ height: 50, width: 280, marginTop: 10 }}
+              placeholderStyle={{ fontWeight: 'bold' }}
+              isRequired={true}
+              onChangeItem={item => this.setState({
+                item1: item.value })}
+            />
+
+
+
+
+            <DropDownPicker
+              items={[
+                { label: 'karachi', value: 'karachi' },
+                { label: 'Islamabad', value: 'Islamabad' },
+                { label: 'Lahore', value: 'Lahore' },
+                { label: 'Bhawalpur', value: 'Bhawalpur' },
+                { label: 'Quetta', value: 'Quetta' },
+                { label: 'Faisalabad', value: 'Faisalabad' },
+                { label: 'Multan', value: 'Multan' },
+                { label: 'Rawalpindi', value: 'Rawalpindi' },
+                { label: 'Hyderabad', value: 'Hyderabad' },
+              ]}
+              dropDownStyle={{ marginTop: 5 }}
+              style={{
+                backgroundColor: 'white',
+                borderColor: 'black',
+                borderRadius: 40,
+              }}
+              itemStyle={{
+                alignItems: 'flex-start',
+                fontSize: 25,
+                color: 'white',
+              }}
+              activeLabelStyle={{ color: 'red' }}
+              placeholder="Your City"
+              containerStyle={{ height: 50, width: 280, marginTop: 20 }}
+              placeholderStyle={{ fontWeight: 'bold' }}
+              isRequired={true}
+              onChangeItem={item => this.setState({
+                item2: item.value })}
+            />
+
+
+
+              <DropDownPicker
+              items={[
+                { label: 'Wedding Event Manager', value: 'Wedding Event Manager' },
+              ]}
+              dropDownStyle={{ marginTop: 5 }}
+              style={{
+                backgroundColor: 'white',
+                borderColor: 'black',
+                borderRadius: 40,
+              }}
+              itemStyle={{
+                alignItems: 'flex-start',
+                fontSize: 25,
+                color: 'white',
+              }}
+              activeLabelStyle={{ color: 'red' }}
+              placeholder="Management Domain"
+              containerStyle={{ height: 50, width: 280, marginTop: 20 }}
+              placeholderStyle={{ fontWeight: 'bold' }}
+              isRequired={true}
+              onChangeItem={item => this.setState({
+                item3: item.value })}
+            />
+
+
+               <View style = {{marginTop: 30}}>
+                    <Text
+                     style={{
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        fontSize: 25,
+                        color: '#0D47A1',
+                        padding: 6,
+                        fontWeight: 'bold' 
+                     }}>
+                        Enter Your Introduction Here
+                    </Text>
+                </View>
+
+
+                <View style={styles.textAreaContainer} >
+                    <TextInput
+                    style={styles.textArea}
+                    underlineColorAndroid="transparent"
+                    placeholder="Type here"
+                    placeholderTextColor="grey"
+                    numberOfLines={10}
+                    multiline={true}
+                    onChangeText={text => 
+                    this.setState({ text })}
+                    value={this.state.text}
+                    />
+                </View>
+                <View>
+                    <Text style={{color:'red', fontSize: 17}}>
+                        Kindly! Add Your Approx Budget too*
+                    </Text>
+                </View>
 
 
 
@@ -493,15 +556,14 @@ export default class EventManager extends ValidationComponent {
               style={{
                 backgroundColor: '#f47100',
                 height: 50,
-                width: 280,
+                width: "100%",
                 padding: 10,
-                margin: 10,
+                marginTop: 60,
                 justifyContent: 'center',
-                alignItems: 'center',
-                borderRadius: 20,
+                alignItems: 'center'
               }}>
               <Text style={{ fontSize: 15, color: 'black', padding: 6 }}>
-                Proceed 1 of 3
+                Proceed to Gallery
               </Text>
             </TouchableOpacity>
 
@@ -523,51 +585,62 @@ const styles = StyleSheet.create({
     padding: 10,
     margin: 15,
     position: 'absolute',
-    top: 158,
+    top: 155,
     right: 272,
   },
   LastName: {
     padding: 10,
     margin: 15,
     position: 'absolute',
-    top: 235,
+    top: 230,
     right: 272,
   },
   email: {
     padding: 10,
     margin: 15,
     position: 'absolute',
-    top: 510,
+    top: 305,
     right: 270,
   },
   phone: {
     padding: 10,
     margin: 15,
     position: 'absolute',
-    top: 590,
+    top: 380,
     right: 270,
   },
   nic: {
     padding: 10,
     margin: 15,
     position: 'absolute',
-    top: 665,
+    top: 460,
     right: 269,
   },
   password: {
     padding: 10,
     margin: 15,
     position: 'absolute',
-    top: 738,
+    top: 535,
     right: 269,
   },
   eyess: {
     padding: 10,
     margin: 15,
     position: 'absolute',
-    top: 745,
+    top: 540,
     right: 46,
   },
+  textAreaContainer: {
+    marginTop: 10,
+    borderColor: 'black',
+    borderWidth: 2,
+    padding: 5
+  },
+  textArea: {
+    height: 230,
+    justifyContent: "flex-start",
+    width: 320
+  }
 });
 
 

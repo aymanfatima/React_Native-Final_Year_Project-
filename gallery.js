@@ -19,7 +19,7 @@ export default function Gallery({navigation}) {
 
 
   const upload = () => {
-    Fire.shared.addPhoto(image,).then(()=>{
+    Fire.shared.uploadPhotoAsync(image,).then(()=>{
       setImage(null)
       alert("You have Successfully made your Profile")
     })
@@ -220,8 +220,8 @@ const styles = StyleSheet.create({
     modalbutton:{
         flexDirection: "row",
         justifyContent: "space-between", 
-        alignItems: "center",
-    },
+       alignItems: "center",
+    }, 
     backbutton:{
         alignItems: "center",
     },

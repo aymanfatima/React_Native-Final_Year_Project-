@@ -9,7 +9,6 @@ import userregister from './userregister';
 import EventManager from './EventManager';
 import button from "./button";
 import User_Dashboard from "./User_Dashboard";
-import Eventmanagertext from './eventmanagertext';
 import Gallery from './gallery';
 import * as firebase from 'firebase';
 
@@ -66,11 +65,6 @@ function App() {
         <Stack.Screen name="User_Dashboard" component={User_Dashboard}
           options={
             { headerStyle: { backgroundColor: "#0D47A1" }, headerTintColor: '#fff' }} />    
-
-
-        <Stack.Screen name="Eventmanagertext" component={Eventmanagertext}
-          options={
-            { headerStyle: { backgroundColor: "#0D47A1" }, headerTintColor: '#fff' }} />             
 
 
           <Stack.Screen name="Gallery" component={Gallery}
