@@ -10,9 +10,6 @@ export default class User_Dashboard extends React.Component{
         manager: propTypes.array.isRequired,
     };
 
-
-
-
   constructor(props) {
       super(props)
       this.state = {
@@ -55,12 +52,13 @@ export default class User_Dashboard extends React.Component{
     {
         return(
         <View style={styles.container}>
+        
 
          {this.state.manager.length > 0
          ? 
          (
                 <Fetchdatamanager 
-                manager={this.state.manager} 
+                manager={this.state.manager}
                 />
         )
         :(
