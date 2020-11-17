@@ -28,10 +28,8 @@ export default class User_Dashboard extends React.Component{
 
       newdata: [],
       mydata: [],
-      manager: [], 
-      image: "",
-      remoteUri: "",
-      upload:""
+      manager: [],
+      image: ""
         }}
 
 

@@ -11,7 +11,8 @@ import button from "./button";
 import User_Dashboard from "./User_Dashboard";
 import Gallery from './gallery';
 import * as firebase from 'firebase';
-
+import Dashboard from './Dashboard';
+import Galleryimage from './Galleryimage';
 
 
 var firebaseConfig = {
@@ -26,16 +27,17 @@ firebase.initializeApp(firebaseConfig);
 
 
 const Stack = createStackNavigator();
+
+
 function App() {
   return (
     <NavigationContainer >
       <Stack.Navigator>
-
         <Stack.Screen
           name="GetStarted"
           component={GetStarted}
           options={
-            { headerStyle: { backgroundColor: "#0D47A1" }, headerTintColor: '#fff' }} />
+            { headerStyle: { backgroundColor: "#0D47A1" }, headerTintColor: '#fff'}} />
 
         <Stack.Screen name="SignIn" component={SignIn}
           options={
@@ -62,14 +64,24 @@ function App() {
             { headerStyle: { backgroundColor: "#0D47A1" }, headerTintColor: '#fff' }} />     
 
 
+        <Stack.Screen name="Dashboard" component={Dashboard}
+          options={
+            { headerStyle: { backgroundColor: "#0D47A1" }, headerTintColor: '#fff' }} />
+
+
         <Stack.Screen name="User_Dashboard" component={User_Dashboard}
           options={
             { headerStyle: { backgroundColor: "#0D47A1" }, headerTintColor: '#fff' }} />    
 
 
           <Stack.Screen name="Gallery" component={Gallery}
-                    options={
-          { headerStyle: { backgroundColor: "#0D47A1" }, headerTintColor: '#fff' }} />   
+          options={
+          { headerStyle: { backgroundColor: "#0D47A1" }, headerTintColor: '#fff' }} />  
+
+
+            <Stack.Screen name="Galleryimage" component={Galleryimage}
+          options={
+          { headerStyle: { backgroundColor: "#0D47A1" }, headerTintColor: '#fff' }} />    
 
 
 

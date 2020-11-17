@@ -1,17 +1,17 @@
 import * as firebase from 'firebase'
 import 'firebase/firestore';
 
-class Fire {
+export default class Fire {
     constructor() {
          if (!firebase.apps.length) {
          // firebase.initializeApp(firebaseConfig);
          }
-        }
+    }
      
 
 
     uploadPhotoAsync = async uri => {
-        const path = `manager/${Date.now()}.jpg`
+        const path = `managerimage/${Date.now()}.jpg`
         return new Promise(async (res, rej) => {
             const response = await fetch(uri)
             const file = await response.blob()
@@ -28,25 +28,31 @@ class Fire {
     }
 
 
-    // addPhoto = async (localUri) => {
-    //     const remoteUri = await this.uploadPhotoAsync(localUri)
-    //     return new Promise((res,rej)=>{
-    //         firebase.database().ref('manager').push({
-    //             image:remoteUri,
-    //             timestamp:this.timestamp,    
-    //         })
-    //         .then(ref=>{
-    //             res(ref)
-    //         })
-    //         .catch(err=>{
-    //             rej(err)
-    //         })
-    //     })
-    // }
+    addPhoto = async (localUri) => {
+        const remoteUri = await this.uploadPhotoAsync(localUri)
+        return new Promise((res,rej)=>{
+            firebase.database().ref('managerimage').push({
+                image:remoteUri,
+                timestamp:this.timestamp,    
+            })
+            .then(ref=>{
+                res(ref)
+            })
+            .catch(err=>{
+                rej(err)
+            })
+        })
+    }
+
+
+
+
     get timestamp() {
         return Date.now()
     }
+
 }
 
+
+
 Fire.shared = new Fire()
-export default Fire;

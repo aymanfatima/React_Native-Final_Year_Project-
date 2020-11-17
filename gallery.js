@@ -19,7 +19,7 @@ export default function Gallery({navigation}) {
 
 
   const upload = () => {
-    Fire.shared.uploadPhotoAsync(image,).then(()=>{
+    Fire.shared.addPhoto(image,).then(()=>{
       setImage(null)
       alert("You have Successfully made your Profile")
     })

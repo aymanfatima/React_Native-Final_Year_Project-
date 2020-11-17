@@ -42,7 +42,7 @@ export default function GetStarted({ navigation }) {
               Services to Customers</Text>
 
         <TouchableOpacity
-          onPress={() => navigation.navigate('User_Dashboard')}
+          onPress={() => navigation.navigate('Dashboard')}
           style={{
             backgroundColor: "#f47100",
             height: 60,
