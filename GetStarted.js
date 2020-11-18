@@ -42,11 +42,11 @@ export default function GetStarted({ navigation }) {
               Services to Customers</Text>
 
         <TouchableOpacity
-          onPress={() => navigation.navigate('Dashboard')}
+          onPress={() => navigation.navigate('SignIn')}
           style={{
             backgroundColor: "#f47100",
-            height: 60,
-            width: 410,
+            height: 65,
+            width: 420,
             padding: 10,
             margin: 20,
             justifyContent: "center",
@@ -54,8 +54,8 @@ export default function GetStarted({ navigation }) {
             marginTop: 90,
             marginBottom: 0,
           }} >
-          <Text style={{ fontSize: 17, color: 'black', padding: 6 }}>
-            Get Started</Text>
+          <Text style={{ fontSize: 17, color: 'black', padding: 6, fontWeight: "bold" }}>
+            G E T  S T A R T E D</Text>
         </TouchableOpacity>
       </View>
     </SafeAreaView>

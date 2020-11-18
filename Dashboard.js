@@ -38,7 +38,8 @@ export default class Dashboard extends React.Component {
                 </TouchableOpacity>
 
                 <TouchableOpacity 
-                style={styles.box}>
+                style={styles.box}
+                onPress = {() => {this.props.navigation.navigate('ComplainArea')}}>
                 <MaterialCommunityIcons name="comment-multiple" size={80} color="black" style={{marginTop: 10}} />
                 <Text style={{fontSize: 18, fontWeight: 'bold'}}>Complain</Text>
                 <Text style={{fontSize: 18, fontWeight: 'bold'}}>Area</Text>

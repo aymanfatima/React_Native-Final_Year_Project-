@@ -66,7 +66,7 @@ export default class SignIn extends ValidationComponent {
         .then(data => {
         console.log('got data ', data);
         console.log(this.email);
-        {this.props.navigation.navigate('User_Dashboard')}
+        {this.props.navigation.navigate('Dashboard')}
         })
 
 

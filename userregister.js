@@ -308,7 +308,7 @@ export default class userregister extends ValidationComponent {
 
 
                         <TouchableOpacity
-                            onPress={() => this.props.navigation.navigate('User_Dashboard')}
+                            onPress={() => this.props.navigation.navigate('SignIn')}
                             style={{
                                 backgroundColor: "#f47100", height: 50, width: 280, padding: 10, margin: 0, justifyContent: "center", alignItems: "center", borderRadius: 20
                             }}>

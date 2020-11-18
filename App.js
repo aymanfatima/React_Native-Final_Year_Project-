@@ -7,12 +7,12 @@ import SignIn from './SignIn';
 import Registration from './Registration';
 import userregister from './userregister';
 import EventManager from './EventManager';
-import button from "./button";
 import User_Dashboard from "./User_Dashboard";
 import Gallery from './gallery';
 import * as firebase from 'firebase';
 import Dashboard from './Dashboard';
 import Galleryimage from './Galleryimage';
+import ComplainArea from './ComplainArea';
 
 
 var firebaseConfig = {
@@ -56,12 +56,7 @@ function App() {
 
         <Stack.Screen name="EventManager" component={EventManager}
           options={
-            { headerStyle: { backgroundColor: "#0D47A1" }, headerTintColor: '#fff' }} />
-
-
-        <Stack.Screen name="button" component={button}
-          options={
-            { headerStyle: { backgroundColor: "#0D47A1" }, headerTintColor: '#fff' }} />     
+            { headerStyle: { backgroundColor: "#0D47A1" }, headerTintColor: '#fff' }} />   
 
 
         <Stack.Screen name="Dashboard" component={Dashboard}
@@ -79,10 +74,14 @@ function App() {
           { headerStyle: { backgroundColor: "#0D47A1" }, headerTintColor: '#fff' }} />  
 
 
-            <Stack.Screen name="Galleryimage" component={Galleryimage}
+          <Stack.Screen name="Galleryimage" component={Galleryimage}
           options={
-          { headerStyle: { backgroundColor: "#0D47A1" }, headerTintColor: '#fff' }} />    
+          { headerStyle: { backgroundColor: "#0D47A1" }, headerTintColor: '#fff' }} />
 
+
+         <Stack.Screen name="ComplainArea" component={ComplainArea}
+          options={
+          { headerStyle: { backgroundColor: "#0D47A1" }, headerTintColor: '#fff' }} />
 
 
       </Stack.Navigator>
