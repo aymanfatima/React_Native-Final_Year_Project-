@@ -21,7 +21,7 @@ export default function Gallery({navigation}) {
   const upload = () => {
     Fire.shared.addPhoto(image,).then(()=>{
       setImage(null)
-      alert("You have Successfully made your Profile")
+      alert("You have Successfully stored pictures in our Application")
     })
     .catch(err=>{
       alert(err.message)
@@ -69,15 +69,7 @@ export default function Gallery({navigation}) {
   return (
     <SafeAreaView  style={styles.container} >
       
-      <TouchableOpacity
-      onPress={() => navigation.navigate('SignIn')}
-      style={{
-      backgroundColor: "#f47100", height: 35, width: '100%', padding: 10, margintop: 100, justifyContent: "center", alignItems: "center"
-      }}>
-      <Text style={{ fontSize: 15, color: 'white', padding: 6 }}>
-      Jump To Sign In!</Text>
-     </TouchableOpacity>
-
+   
 
     <View style = {{marginTop: 10}}>
            <Text

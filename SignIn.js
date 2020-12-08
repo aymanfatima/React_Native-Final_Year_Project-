@@ -66,7 +66,8 @@ export default class SignIn extends ValidationComponent {
         .then(data => {
         console.log('got data ', data);
         console.log(this.email);
-        {this.props.navigation.navigate('Dashboard')}
+        {this.props.navigation.navigate('Application')}
+
         })
 
 
@@ -145,18 +146,18 @@ export default class SignIn extends ValidationComponent {
                 backgroundColor: "#f47100", height: 50, width: 280, padding: 10, margin: 20, alignItems: "center", borderRadius: 20
               }}>
               <Text style={{ fontSize: 17, color: 'black', padding: 6 }}>
-                Log In</Text>
+                S I G N - I N</Text>
             </TouchableOpacity>
 
 
 
             <TouchableOpacity
-                         onPress={() => this.props.navigation.navigate('Registration')}
+                         onPress={() => this.props.navigation.navigate('userregister')}
               style={{
                 backgroundColor: "#f47100", height: 50, width: 280, padding: 10, margin: 5, alignItems: "center", borderRadius: 20
               }}>
-              <Text style={{ fontSize: 15, color: 'black', padding: 6 }}>
-                Not a Member? Register as</Text>
+              <Text style={{ fontSize: 17, color: 'black', padding: 6 }}>
+                S I G N - U P</Text>
             </TouchableOpacity>
 
 

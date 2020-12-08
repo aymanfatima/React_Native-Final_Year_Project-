@@ -210,7 +210,7 @@ export default class userregister extends ValidationComponent {
                             color: "#0D47A1",
                             padding: 6,
                             fontWeight: "bold"
-                        }}>ACCOUNT AS USER REGISTER</Text>
+                        }}>ACCOUNT REGISTRATION</Text>
 
 
 
@@ -302,7 +302,7 @@ export default class userregister extends ValidationComponent {
                                 backgroundColor: "#f47100", height: 50, width: 280, padding: 10, margin: 10, justifyContent: "center", alignItems: "center", borderRadius: 20
                             }}>
                             <Text style={{ fontSize: 15, color: 'black', padding: 6 }}>
-                                Register User Account</Text>
+                                Register Your Account</Text>
                         </TouchableOpacity>
 
 

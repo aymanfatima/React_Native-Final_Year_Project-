@@ -4,15 +4,17 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import GetStarted from './GetStarted';
 import SignIn from './SignIn';
-import Registration from './Registration';
+import Application from './Registration';
 import userregister from './userregister';
 import EventManager from './EventManager';
 import User_Dashboard from "./User_Dashboard";
 import Gallery from './gallery';
 import * as firebase from 'firebase';
-import Dashboard from './Dashboard';
+import CustomerDashboard from './Dashboard';
 import Galleryimage from './Galleryimage';
 import ComplainArea from './ComplainArea';
+import ManagerDashboard from './Managerdashboard';
+
 
 
 var firebaseConfig = {
@@ -37,14 +39,19 @@ function App() {
           name="GetStarted"
           component={GetStarted}
           options={
-            { headerStyle: { backgroundColor: "#0D47A1" }, headerTintColor: '#fff'}} />
+            { headerStyle: { backgroundColor: "#0D47A1" }, headerTintColor: '#fff'
+            // headerRight: () =>(
+            //   <TouchableOpacity  onPress={() => console.log('Pressed')}>
+            //    Press me
+            //   </TouchableOpacity> )
+          }} />
 
         <Stack.Screen name="SignIn" component={SignIn}
           options={
             { headerStyle: { backgroundColor: "#0D47A1" }, headerTintColor: '#fff' }} />
 
 
-        <Stack.Screen name="Registration" component={Registration}
+        <Stack.Screen name="Application" component={Application}
           options={
             { headerStyle: { backgroundColor: "#0D47A1" }, headerTintColor: '#fff' }} />
 
@@ -59,7 +66,7 @@ function App() {
             { headerStyle: { backgroundColor: "#0D47A1" }, headerTintColor: '#fff' }} />   
 
 
-        <Stack.Screen name="Dashboard" component={Dashboard}
+        <Stack.Screen name="CustomerDashboard" component={CustomerDashboard}
           options={
             { headerStyle: { backgroundColor: "#0D47A1" }, headerTintColor: '#fff' }} />
 
@@ -82,6 +89,10 @@ function App() {
          <Stack.Screen name="ComplainArea" component={ComplainArea}
           options={
           { headerStyle: { backgroundColor: "#0D47A1" }, headerTintColor: '#fff' }} />
+
+          <Stack.Screen name="ManagerDashboard" component={ManagerDashboard}
+          options={
+          { headerStyle: { backgroundColor: "#0D47A1" }, headerTintColor: '#fff' }} />   
 
 
       </Stack.Navigator>

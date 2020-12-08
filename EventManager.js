@@ -121,43 +121,42 @@ export default class EventManager extends ValidationComponent {
 
   // //VALIDATING EMPTY FIELDS
   validate_field = () => {
-  //   const { text, FirstName, LastName, password, email, cnic, phone, item1, item2, item3 } = this.state;
-  //   if (FirstName == '') {
-  //     alert('Kindly Fill Your First Name!');
-  //     return false;
-  //   } else if (LastName == '') {
-  //     alert('Kindly Fill Your Last Name!');
-  //     return false;
-  //   } else if (item1 == '') {
-  //     alert('Kindly Select your Experience!');
-  //     return false;
-  //   } else if (item2 == '') {
-  //     alert('Kindly Select your City!');
-  //     return false;
-  //   }
-  //   else if (item3 == '') {
-  //     alert('Kindly Select your Management domain!');
-  //     return false;
-  //   }
-  //   else if (email == '') {
-  //     alert('Kindly Fill Your Email!');
-  //     return false;
-  //   }
-  //   else if (phone == '') {
-  //     alert('Kindly Fill Your Phone Number!');
-  //     return false;
-  //   }
-  //   else if (cnic == '') {
-  //     alert('Kindly Fill Your CNIC!');
-  //     return false;
-  //   } else if (password == '') {
-  //     alert('Kindly Fill Your Password!');
-  //     return false;
-  //   }
-  //   if (text == '') {
-  //     alert('Kindly Fill Your Introduction');
-  //     return false;
-  //   }
+    const { text, FirstName, LastName, password, email, cnic, phone, item1, item2, item3 } = this.state;
+    if (FirstName == '') {
+      alert('Kindly Fill Your First Name!');
+      return false;
+    } else if (LastName == '') {
+      alert('Kindly Fill Your Last Name!');
+      return false;
+    } else if (email == '') {
+      alert('Kindly Fill Your Email!');
+      return false;
+    }
+    else if (phone == '') {
+      alert('Kindly Fill Your Phone Number!');
+      return false;
+    }
+    else if (cnic == '') {
+      alert('Kindly Fill Your CNIC!');
+      return false;
+    } else if (password == '') {
+      alert('Kindly Fill Your Password!');
+      return false;
+    } else if (item1 == '') {
+      alert('Kindly Select your Experience!');
+      return false;
+    } else if (item2 == '') {
+      alert('Kindly Select your City!');
+      return false;
+    }
+    else if (item3 == '') {
+      alert('Kindly Select your Management domain!');
+      return false;
+    }
+    if (text == '') {
+      alert('Kindly Fill Your Introduction');
+      return false;
+    }
     return true;
   };
 
@@ -184,29 +183,30 @@ export default class EventManager extends ValidationComponent {
     making_api_call = (email, password) => {
     if(this.validate_field())
     {      
-    // firebase.auth().createUserWithEmailAndPassword(email, password)
-    // .then(newdata => {
-    //     console.log('got data ', newdata);
-    //     console.log(this.email); 
-    //     const manager= firebase.database().ref("manager");
-    //     manager.push({
-    //     FirstName: this.state.FirstName,
-    //     LastName: this.state.LastName,
-    //     item1: this.state.item1,
-    //     item2: this.state.item2,
-    //     item3: this.state.item3,
-    //     email: firebase.auth().currentUser.email,
-    //     phone: this.state.phone,
-    //     cnic: this.state.cnic,
-    //     text: this.state.text,  
-    //     userId: firebase.auth().currentUser.uid,               
-    //     time: Date.now()})
-        {this.props.navigation.navigate('Gallery')}
-    // }
-    // )
-        // .catch(error => {
-        // alert(error);
-        // });
+    firebase.auth().createUserWithEmailAndPassword(email, password)
+    .then(newdata => {
+        console.log('got data ', newdata);
+        console.log(this.email); 
+        const manager= firebase.database().ref("manager");
+        manager.push({
+        FirstName: this.state.FirstName,
+        LastName: this.state.LastName,
+        item1: this.state.item1,
+        item2: this.state.item2,
+        item3: this.state.item3,
+        email: firebase.auth().currentUser.email,
+        phone: this.state.phone,
+        cnic: this.state.cnic,
+        text: this.state.text,  
+        userId: firebase.auth().currentUser.uid,               
+        time: Date.now()})
+        alert("You have Successfully Created your Profile")
+        // {this.props.navigation.navigate('ManagerDashboard')}
+    }
+    )
+        .catch(error => {
+        alert(error);
+        });
        }
     }    
 
@@ -258,7 +258,7 @@ export default class EventManager extends ValidationComponent {
                 fontWeight: 'bold',
               }}
             >
-              ACCOUNT AS WEDDING MANAGER
+              PROFILE AS WEDDING MANAGER
             </Text>
 
             <Text
@@ -563,7 +563,7 @@ export default class EventManager extends ValidationComponent {
                 alignItems: 'center'
               }}>
               <Text style={{ fontSize: 15, color: 'black', padding: 6 }}>
-                Proceed to Gallery
+                C R E A T E  P R O F I L E
               </Text>
             </TouchableOpacity>
 

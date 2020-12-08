@@ -43,7 +43,7 @@ export default class ComplainArea extends React.Component {
     datas.on("value", snapshot => {
     let newsdata = snapshot.val();
     let Complains = Object.values(newsdata);
-    this.setState({Complains});       })
+    this.setState({Complains});   })
         }
 
 
@@ -61,7 +61,7 @@ export default class ComplainArea extends React.Component {
    
         .catch(error => {
         alert(error);
-                });
+            });
                 alert ('Your Complain has been Recorded !')
                 this.state.list = "",
                 this.state.texts = "",
