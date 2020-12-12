@@ -10,8 +10,7 @@ export default class Fetchdatamanager extends React.Component{
     static propTypes = {
         manager: propTypes.array.isRequired,
     };
-    
-    
+   
 
     render()
     {
@@ -105,7 +104,7 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         elevation: 10,
         backgroundColor: 'white',
-        marginBottom: 20
+        marginBottom: 20,
     
     },
     innerbox: {

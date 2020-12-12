@@ -67,14 +67,17 @@ export default class SignIn extends ValidationComponent {
         console.log('got data ', data);
         console.log(this.email);
         {this.props.navigation.navigate('Application')}
-
-        })
+        this.setState({email: ""});
+        this.setState({password: ""});
+      })
+        
 
 
         .catch(error => {
         console.log('got an error ', error);
         alert(error);});
         }
+      
    }
     
   
@@ -116,7 +119,7 @@ export default class SignIn extends ValidationComponent {
               style={{
                 height: 50, borderColor: 'black', borderWidth: 2, width: 280,
                 alignItems: "center", paddingLeft: 50, margin: 15, borderRadius: 20
-              }} onChangeText={(email) => { this.alphaValidEmail(email) }}
+              }} onChangeText={(email) => { this.alphaValidEmail(email)}} value={this.state.email} 
             />
             <Text style={{ color: 'red', marginTop: -15 }}>
               {this.state.invalidemail}

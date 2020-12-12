@@ -1,15 +1,10 @@
 import React from 'react';
 import { StyleSheet, Text, View} from 'react-native';
-import propTypes from 'prop-types';
 import * as firebase from 'firebase';
 import Fetchdatamanager from './fetchdatamanager';
 
 
 export default class User_Dashboard extends React.Component{
-    static propTypes = {
-        manager: propTypes.array.isRequired,
-    };
-
   constructor(props) {
       super(props)
       this.state = {
@@ -28,8 +23,8 @@ export default class User_Dashboard extends React.Component{
 
       newdata: [],
       mydata: [],
-      manager: [],
-      image: ""
+      image: "",
+      manager : {manager: null}
         }}
 
 

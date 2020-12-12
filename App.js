@@ -17,6 +17,8 @@ import ManagerDashboard from './Managerdashboard';
 
 
 
+
+
 var firebaseConfig = {
   apiKey: "AIzaSyCBjviyeXl2rguFhyux1_gZrEt-NgB5vfc",
   authDomain: "eventmanagerapp-20f33.firebaseapp.com",
@@ -31,7 +33,7 @@ firebase.initializeApp(firebaseConfig);
 const Stack = createStackNavigator();
 
 
-function App() {
+function App({ navigation }) {
   return (
     <NavigationContainer >
       <Stack.Navigator>
@@ -39,16 +41,11 @@ function App() {
           name="GetStarted"
           component={GetStarted}
           options={
-            { headerStyle: { backgroundColor: "#0D47A1" }, headerTintColor: '#fff'
-            // headerRight: () =>(
-            //   <TouchableOpacity  onPress={() => console.log('Pressed')}>
-            //    Press me
-            //   </TouchableOpacity> )
-          }} />
+            { headerStyle: { backgroundColor: "#0D47A1" }, headerTintColor: '#fff'}} />
 
         <Stack.Screen name="SignIn" component={SignIn}
           options={
-            { headerStyle: { backgroundColor: "#0D47A1" }, headerTintColor: '#fff' }} />
+            { headerStyle: { backgroundColor: "#0D47A1" }, headerTintColor: '#fff'}} />
 
 
         <Stack.Screen name="Application" component={Application}

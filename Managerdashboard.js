@@ -1,6 +1,6 @@
 import React from 'react';
 import { SliderBox } from "react-native-image-slider-box";
-import { StyleSheet, View, Text, TouchableOpacity} from 'react-native';
+import { StyleSheet, View, Text, TouchableOpacity, Switch} from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { Entypo } from '@expo/vector-icons';
@@ -21,18 +21,46 @@ export default class ManagerDashboard extends React.Component {
 
 
     render(){
+
         return (
             <View style = {styles.container}>
             <View>
-            <SliderBox images={this.state.images} style={{height : 250}}/>
+
+            <View style={styles.main1}>
+            {this.state.toggle ?  
+            this.props.navigation.navigate('CustomerDashboard') 
+            : <Text style={{textAlign: "center", justifyContent: "center",  fontSize: 17, fontStyle: "italic", padding: 5}}>
+            Switch to Customer Dashboard</Text> }
+
+            <Switch
+            trackColor={{false: 'green', true: 'green'}}
+            thumbColor="white"
+            onValueChange={(value) => this.setState({toggle: value})}
+            value={this.state.toggle}
+            style={{marginTop: 0, size: 20}}
+            />
+            </View> 
+
+            <TouchableOpacity
+                    onPress={() => this.props.navigation.navigate('SignIn')}
+                    style={{
+                        backgroundColor: "#f47100", height: 40, width: 95, position: 'absolute', right: -1, marginBottom: 10}}>
+                    <Text style={{ fontSize: 13, color: 'black', fontWeight: "bold", padding: 8, paddingLeft: 10}}>
+                        L O G   O U T</Text>
+            </TouchableOpacity>
+
+
+
+            <SliderBox images={this.state.images} style={{height : 240}}/>
             </View>
 
             <View>
                 <View style={styles.main}>
+
                 <TouchableOpacity 
                 style={styles.box}
                 onPress = {() => {this.props.navigation.navigate("EventManager")}}>
-                <Ionicons name="md-person" size={80} color="#0D47A1" />
+                <Ionicons name="md-person" size={75} color="#0D47A1" />
                 <Text style={{fontSize: 18, fontWeight: 'bold', color:"#0D47A1"}}>Create Your</Text>
                 <Text style={{fontSize: 18, fontWeight: 'bold', color:"#0D47A1"}}>Profile</Text>
                 </TouchableOpacity>
@@ -40,21 +68,19 @@ export default class ManagerDashboard extends React.Component {
                 <TouchableOpacity 
                 style={styles.box}
                 onPress = {() => {this.props.navigation.navigate('ComplainArea')}}>
-                <MaterialCommunityIcons name="comment-multiple" size={80} color="#0D47A1" style={{marginTop: 10}} />
+                <MaterialCommunityIcons name="comment-multiple" size={75} color="#0D47A1" style={{marginTop: 5}} />
                 <Text style={{fontSize: 18, fontWeight: 'bold', color:"#0D47A1"}}>Complain</Text>
                 <Text style={{fontSize: 18, fontWeight: 'bold', color:"#0D47A1"}}>Area</Text>
                 </TouchableOpacity>
 
                 <TouchableOpacity style={styles.box}
                 onPress = {() => {this.props.navigation.navigate('Gallery')}}>
-                <Entypo name="images" size={70} color="#0D47A1" style={{marginTop: 20}}/>
+                <Entypo name="images" size={70} color="#0D47A1" style={{marginTop: 10}}/>
                 <Text style={{fontSize: 18, fontWeight: 'bold', color:"#0D47A1"}}>Create</Text>
                 <Text style={{fontSize: 18, fontWeight: 'bold', color: "#0D47A1"}}>Gallery</Text>
                 </TouchableOpacity>
                 </View>
             </View>
-
-
             </View>
         )
     }
@@ -68,10 +94,10 @@ container:
 box:
 {
     marginTop: 20,
-    elevation: 30,
-    shadowOpacity: 0.7,
-    backgroundColor: "orange",
-    height: 150,
+    elevation: 10,
+    shadowOpacity: 1,
+    backgroundColor: "#c9c6c5",
+    height: 130,
     width: 150, 
     alignItems: 'center'
 }, 
@@ -80,5 +106,15 @@ main:{
     flexDirection:'row',
     justifyContent: 'space-around',
     flexWrap: 'wrap'
+},
+main1:{
+    display: 'flex',
+    flexDirection:'row',
+    justifyContent: 'space-around',
+    flexWrap: 'wrap',
+    backgroundColor: "#d9cccc",
+    width: "80%",
+    height: 40,
+    marginBottom: 5
 }
 })
