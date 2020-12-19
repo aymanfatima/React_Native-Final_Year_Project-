@@ -42,7 +42,7 @@ export default function GetStarted({ navigation }) {
               Services to Customers</Text>
 
         <TouchableOpacity
-          onPress={() => navigation.navigate('Application')}
+          onPress={() => navigation.navigate('Booking')}
           style={{
             backgroundColor: "#f47100",
             height: 65,

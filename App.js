@@ -14,6 +14,7 @@ import CustomerDashboard from './Dashboard';
 import Galleryimage from './Galleryimage';
 import ComplainArea from './ComplainArea';
 import ManagerDashboard from './Managerdashboard';
+import Booking from'./Booking';
 
 
 
@@ -89,7 +90,11 @@ function App({ navigation }) {
 
           <Stack.Screen name="ManagerDashboard" component={ManagerDashboard}
           options={
-          { headerStyle: { backgroundColor: "#0D47A1" }, headerTintColor: '#fff' }} />   
+          { headerStyle: { backgroundColor: "#0D47A1" }, headerTintColor: '#fff' }} /> 
+
+            <Stack.Screen name="Booking" component={Booking}
+          options={
+          { headerStyle: { backgroundColor: "#0D47A1" }, headerTintColor: '#fff' }} />     
 
 
       </Stack.Navigator>
