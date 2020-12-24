@@ -79,6 +79,14 @@ export default class ManagerDashboard extends React.Component {
                 <Text style={{fontSize: 18, fontWeight: 'bold', color:"#0D47A1"}}>Create</Text>
                 <Text style={{fontSize: 18, fontWeight: 'bold', color: "#0D47A1"}}>Gallery</Text>
                 </TouchableOpacity>
+
+
+                <TouchableOpacity style={styles.box}
+                onPress = {() => {this.props.navigation.navigate('YourBookings')}}>
+                <MaterialCommunityIcons name="email" size={70} color="#0D47A1" style={{marginTop: 5}} />
+                <Text style={{fontSize: 18, fontWeight: 'bold', color:"#0D47A1"}}>Your</Text>
+                <Text style={{fontSize: 18, fontWeight: 'bold', color: "#0D47A1"}}>Bookings</Text>
+                </TouchableOpacity>
                 </View>
             </View>
             </View>
@@ -94,9 +102,9 @@ container:
 box:
 {
     marginTop: 20,
-    elevation: 10,
+    elevation: 8,
     shadowOpacity: 1,
-    backgroundColor: "#c9c6c5",
+    backgroundColor: "#dedad1",
     height: 130,
     width: 150, 
     alignItems: 'center'

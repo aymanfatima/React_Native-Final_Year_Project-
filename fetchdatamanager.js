@@ -5,10 +5,9 @@ import { ScrollView } from 'react-native-gesture-handler';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 
-
 export default class Fetchdatamanager extends React.Component{
     static propTypes = {
-        manager: propTypes.array.isRequired,
+        manager: propTypes.array.isRequired
     };
    
 
@@ -48,7 +47,7 @@ export default class Fetchdatamanager extends React.Component{
 
             
             
-
+            <View style={styles.flexw}>
             <TouchableOpacity 
             onPress={() => 
                 {
@@ -66,14 +65,36 @@ export default class Fetchdatamanager extends React.Component{
             style={{
             backgroundColor: '#0D47A1',
             height: 65,
-            width: "100%",
+            width: "49%",
             justifyContent: 'center',
             alignSelf: 'center',
             marginTop: 10}}>
             <Text style={{ fontSize: 20, color: 'white', textAlign: 'center', fontWeight: 'bold'}}>
-            C O N T A C T
+            CONTACT
             </Text>
             </TouchableOpacity>
+            
+            <TouchableOpacity 
+            onPress={() => {this.props.navigation.navigate('Booking')}}
+            style={{
+            backgroundColor: '#0D47A1',
+            height: 65,
+            width: "49%",
+            justifyContent: 'center',
+            alignSelf: 'center',
+            marginTop: 10
+            }}>
+            <Text style={{ fontSize: 20, color: 'white', textAlign: 'center', fontWeight: 'bold'}}>
+            BOOKING
+            </Text>
+            </TouchableOpacity>
+            </View>
+
+
+
+
+
+            
              </View>       
          )})}  
 
@@ -98,7 +119,7 @@ const styles = StyleSheet.create({
         margin: -10
     },
     box :{
-        height: 588,
+        height: 585,
         width: '100%',
         borderColor: "black",
         borderWidth: 1,
@@ -118,5 +139,11 @@ const styles = StyleSheet.create({
         alignSelf: 'center',
         elevation: 10,
         borderColor: 'grey'
+    }, 
+    flexw:{
+    display: 'flex',
+    flexDirection:'row',
+    justifyContent: 'space-around',
+    flexWrap: 'wrap'
     }
 })

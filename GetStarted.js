@@ -1,10 +1,8 @@
 import React from 'react';
-import { StyleSheet, Text, View, Image, TouchableOpacity, SafeAreaView, Platform } from 'react-native';
+import { StyleSheet, Text, View, Image, TouchableOpacity, SafeAreaView} from 'react-native';
 export default function GetStarted({ navigation }) {
   return (
-
     <SafeAreaView style={styles.container}>
-
       <View style={{
         backgroundColor: 'white',
         alignItems: 'center', justifyContent: "center",
@@ -42,7 +40,7 @@ export default function GetStarted({ navigation }) {
               Services to Customers</Text>
 
         <TouchableOpacity
-          onPress={() => navigation.navigate('Booking')}
+          onPress={() => navigation.navigate('Application')}
           style={{
             backgroundColor: "#f47100",
             height: 65,

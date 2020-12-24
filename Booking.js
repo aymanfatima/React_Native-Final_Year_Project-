@@ -1,12 +1,21 @@
 import React from 'react';
-import {Text, StyleSheet, View, TouchableOpacity} from 'react-native';
+import {Text, StyleSheet, View, TouchableOpacity, FlatList} from 'react-native';
 import DropDownPicker from 'react-native-dropdown-picker';
-import { TextInput } from 'react-native-gesture-handler';
+import {TextInput } from 'react-native-gesture-handler';
 import SelectMultiple from 'react-native-select-multiple';
 import * as firebase from 'firebase';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scrollview';
 
 const decoration = ['Balloons', 'Party Popper', 'Cake', 'Candle', 'Flowers', 'Disco Lights']
+
+const renderLabel = (label) => {
+  return (
+    <View style={{flexDirection: 'row', alignItems: 'center', height: 35, width: 200}}>
+        <Text style={{fontSize: 16, fontWeight: "400"}}>{label}</Text>
+      </View>
+  )
+}
+
 
 export default class Booking extends React.Component{
     constructor(props) {
@@ -18,28 +27,15 @@ export default class Booking extends React.Component{
             location: "",
             datevent: "", month: "", year: "",
             hour: "", minutes: "", ampm: "",
-
             theme: "",
             area: "",
             guest: "",
-
             selecteddecor: [],
-
-
-            newsdata: [],
-            datas: [],
+            newsdatas: [],
+            datass: [],
             BookingArea: []
         }
       }
-
-      // renderLabel = (label) =>{
-      //   return(
-      //     <View style={{flexDirection: "row", alignItems: "center", borderColor: "black"}}>
-      //       <Text style={{fontSize: 20, color: "black"}}>{label}</Text>
-      //     </View>
-      //   )
-      // }
-
 
       onSelectionsChange = (selecteddecor) =>{
         this.setState({selecteddecor})
@@ -112,12 +108,13 @@ export default class Booking extends React.Component{
 
 
         componentDidMount(){
-          let datas = firebase.database().ref("BookingArea");
-          datas.on("value", snapshot => {
-          let newsdata = snapshot.val();
-          let BookingArea = Object.values(newsdata);
+          let datass = firebase.database().ref("BookingArea");
+          datass.on("value", snapshot => {
+          let newsdatas = snapshot.val();
+          let BookingArea = Object.values(newsdatas);
           this.setState({BookingArea});   })
-        }
+          }
+        
       
 
 
@@ -175,8 +172,7 @@ export default class Booking extends React.Component{
             <View>
 
 
-            {/* Manager name */}
-            <Text style={{color: "blue", marginTop: 15, fontWeight: 'bold'}}>Enter Event Manager Name</Text>
+             <Text style={{color: "blue", marginTop: 15, fontWeight: 'bold'}}>Enter Event Manager Name</Text>
             <TextInput placeholderTextColor = "black"
               placeholder="Enter Name" 
               style={{
@@ -193,7 +189,6 @@ export default class Booking extends React.Component{
 
 
 
-            {/* name component */}
             <Text style={{color: "blue", marginTop: 15, fontWeight: 'bold'}}>Enter your Name here</Text>
             <TextInput placeholderTextColor = "black"
               placeholder="Enter Name" 
@@ -211,7 +206,7 @@ export default class Booking extends React.Component{
 
     
     
-                {/*  Package */}
+              
                 <Text style={{color: "blue", marginTop: 15, fontWeight: 'bold'}}>Select Package</Text>
                 <DropDownPicker
                 items={[
@@ -247,11 +242,10 @@ export default class Booking extends React.Component{
 
 
 
-            {/* location component */}
+       
             <Text style={{color: "blue", marginTop: 15, fontWeight: 'bold'}}>Enter your Location</Text>
             <TextInput placeholderTextColor = "black"
               placeholder="Location" 
-              maxLength={15}
               style={{
                 height: 55,
                 borderColor: 'black',
@@ -267,7 +261,7 @@ export default class Booking extends React.Component{
 
 
                 
-            {/* day selector */}
+       
                 <Text style={{color: "blue", marginTop: 15, fontWeight: 'bold'}}>Select Date of Event</Text>
                 <View style={styles.dateevent}>
                 <DropDownPicker
@@ -326,10 +320,6 @@ export default class Booking extends React.Component{
   
 
 
-
-
-
-                    {/* Month picker */}
             <DropDownPicker
                 items={[
                 {label: 'January', value: 'January',},
@@ -369,10 +359,6 @@ export default class Booking extends React.Component{
 
 
 
-
-
-
-                    {/* Year */}
                <DropDownPicker
                 items={[
                 {label: '2021', value: '2021',},
@@ -517,7 +503,6 @@ export default class Booking extends React.Component{
 
 
             <Text style={{color: "black", marginLeft: 10, marginTop: 50,fontSize: 27, fontWeight: "bold"}}>YOUR REQUIREMENTS</Text>
-            {/* theme name */}
             <Text style={{color: "blue", marginTop: 15, fontWeight: 'bold'}}>Enter Your Theme Color</Text>
             <TextInput placeholderTextColor = "black"
               placeholder="Theme Color" 
@@ -533,7 +518,6 @@ export default class Booking extends React.Component{
             />
 
 
-            {/* area name */}
             <Text style={{color: "blue", marginTop: 15, fontWeight: 'bold'}}>Enter Location (area) in Square.feets</Text>
             <TextInput placeholderTextColor = "black"
               placeholder="Areaa" 
@@ -549,7 +533,7 @@ export default class Booking extends React.Component{
             />
 
 
-              {/* guest name */}
+      
               <Text style={{color: "blue", marginTop: 15, fontWeight: 'bold'}}>Enter Number of Guest</Text>
             <TextInput placeholderTextColor = "black"
               placeholder="Guest" 
@@ -567,8 +551,10 @@ export default class Booking extends React.Component{
 
 
         <Text style={{color: "black", marginLeft: 20, marginBottom:0, marginTop: 50,fontSize: 27, fontWeight: "bold"}}>DECORATION ITEMS</Text>
+ 
+      
         <SelectMultiple 
-        // renderLabel={renderLabel}
+        renderLabel={renderLabel}
         items={decoration}
         selectedItems={this.state.selecteddecor}
         onSelectionsChange={this.onSelectionsChange}
@@ -585,7 +571,7 @@ export default class Booking extends React.Component{
             justifyContent: "center",
             alignItems: "center",
             position: "relative",
-            top: -30
+            top: -5
           }} >
           <Text style={{ fontSize: 25, color: 'black', padding: 6, fontWeight: "300" }}>
             B O O K I N G</Text>
@@ -613,7 +599,7 @@ const styles = StyleSheet.create({
         marginBottom: 0
     },
     secondContainer:{
-        height: 1420,
+        height: 1440,
         width: 380,
         borderColor: "orange",
         marginTop: 5,

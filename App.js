@@ -15,9 +15,9 @@ import Galleryimage from './Galleryimage';
 import ComplainArea from './ComplainArea';
 import ManagerDashboard from './Managerdashboard';
 import Booking from'./Booking';
-
-
-
+import YourBookings from './Yourbookingone';
+import ConfirmationForm from './NicForm';
+import ConfirmedEvent from './Yourevent';
 
 
 var firebaseConfig = {
@@ -34,7 +34,7 @@ firebase.initializeApp(firebaseConfig);
 const Stack = createStackNavigator();
 
 
-function App({ navigation }) {
+function App() {
   return (
     <NavigationContainer >
       <Stack.Navigator>
@@ -95,6 +95,18 @@ function App({ navigation }) {
             <Stack.Screen name="Booking" component={Booking}
           options={
           { headerStyle: { backgroundColor: "#0D47A1" }, headerTintColor: '#fff' }} />     
+
+          <Stack.Screen name="YourBookings" component={YourBookings}
+          options={
+          { headerStyle: { backgroundColor: "#0D47A1" }, headerTintColor: '#fff' }} /> 
+
+        <Stack.Screen name="ConfirmationForm" component={ConfirmationForm}
+          options={
+          { headerStyle: { backgroundColor: "#0D47A1" }, headerTintColor: '#fff' }} /> 
+
+          <Stack.Screen name="ConfirmedEvent" component={ConfirmedEvent}
+          options={
+          { headerStyle: { backgroundColor: "#0D47A1" }, headerTintColor: '#fff' }} />         
 
 
       </Stack.Navigator>

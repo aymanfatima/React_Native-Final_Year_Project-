@@ -4,6 +4,7 @@ import { StyleSheet, View, Text, TouchableOpacity, Switch} from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { Entypo } from '@expo/vector-icons';
+import {MaterialIcons} from '@expo/vector-icons';
 
 export default class CustomerDashboard extends React.Component {
     constructor(props) {
@@ -67,7 +68,7 @@ export default class CustomerDashboard extends React.Component {
                 <TouchableOpacity 
                 style={styles.box}
                 onPress = {() => {this.props.navigation.navigate('ComplainArea')}}>
-                <MaterialCommunityIcons name="comment-multiple" size={70} color="black" style={{marginTop: 10}} />
+                <MaterialCommunityIcons name="comment-multiple" size={70} color="black" style={{marginTop: 5}} />
                 <Text style={{fontSize: 18, fontWeight: 'bold'}}>Complain</Text>
                 <Text style={{fontSize: 18, fontWeight: 'bold'}}>Area</Text>
                 </TouchableOpacity>
@@ -76,6 +77,12 @@ export default class CustomerDashboard extends React.Component {
                 onPress = {() => {this.props.navigation.navigate('Galleryimage')}}>
                 <Entypo name="images" size={80} color="black" style={{marginTop: 10}}/>
                 <Text style={{fontSize: 18, fontWeight: 'bold'}}>Gallery</Text>
+                </TouchableOpacity>
+
+                <TouchableOpacity style={styles.box}
+                onPress = {() => {this.props.navigation.navigate('ConfirmedEvent')}}>
+                <MaterialIcons name="event-available" size={80} color="black" style={{marginTop: 10}}/>
+                <Text style={{fontSize: 18, fontWeight: 'bold'}}>Events</Text>
                 </TouchableOpacity>
                 </View>
             </View>
@@ -94,12 +101,13 @@ container:
 box:
 {
     marginTop: 15,
-    elevation: 10,
+    elevation: 5,
     shadowOpacity: 1,
     backgroundColor: "#d9cccc",
     height: 130,
     width: 150, 
-    alignItems: 'center'
+    alignItems: 'center',
+
 }, 
 main:{
     display: 'flex',

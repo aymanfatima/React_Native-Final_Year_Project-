@@ -52,10 +52,11 @@ export default class User_Dashboard extends React.Component{
          (
                 <Fetchdatamanager 
                 manager={this.state.manager}
+                navigation={this.props.navigation}
                 />
         )
         :(
-        <Text>No data found</Text>
+        <Text>Preparing For Data...</Text>
         )}       
 
         </View>
