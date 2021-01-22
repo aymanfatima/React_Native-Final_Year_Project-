@@ -8,7 +8,7 @@ import { AntDesign } from '@expo/vector-icons';
 import * as firebase from 'firebase';
 
 
-export default class SignIn extends ValidationComponent {
+export default class UserSignIn extends ValidationComponent {
   //CONTRUCTOR
   constructor(props) {
     super(props)
@@ -66,7 +66,7 @@ export default class SignIn extends ValidationComponent {
         .then(data => {
         console.log('got data ', data);
         console.log(this.email);
-        {this.props.navigation.navigate('ManagerDashboard')}
+        {this.props.navigation.navigate('CustomerDashboard')}
         this.setState({email: ""});
         this.setState({password: ""});
       })
@@ -149,7 +149,7 @@ export default class SignIn extends ValidationComponent {
                 backgroundColor: "#f47100", height: 50, width: 280, padding: 10, margin: 20, alignItems: "center", borderRadius: 20
               }}>
               <Text style={{ fontSize: 17, color: 'black', padding: 5, fontWeight: 'bold' }}>
-                SIGN IN AS MANAGER</Text>
+                SIGN IN AS USER</Text>
             </TouchableOpacity>
 
 

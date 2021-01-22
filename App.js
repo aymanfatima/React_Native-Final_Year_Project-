@@ -18,6 +18,7 @@ import Booking from'./Booking';
 import YourBookings from './Yourbookingone';
 import ConfirmationForm from './NicForm';
 import ConfirmedEvent from './Yourevent';
+import UserSignIn from './User-SignIn';
 
 
 var firebaseConfig = {
@@ -108,7 +109,9 @@ function App() {
           options={
           { headerStyle: { backgroundColor: "#0D47A1" }, headerTintColor: '#fff' }} />         
 
-
+         <Stack.Screen name="UserSignIn" component={UserSignIn}
+          options={
+          { headerStyle: { backgroundColor: "#0D47A1" }, headerTintColor: '#fff' }} />         
       </Stack.Navigator>
     </NavigationContainer>
   );

@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, TouchableOpacity} from 'react-native';
+import { StyleSheet, Text, View} from 'react-native';
 import propTypes from 'prop-types';
 import { ScrollView } from 'react-native-gesture-handler';
 import { SafeAreaView } from 'react-native-safe-area-context';
@@ -24,22 +24,6 @@ export default class Eventone extends React.Component{
             <View style={styles.rowalign}>
             <Text style={{fontSize:18}}>{Confirmationbase.name} {Confirmationbase.listaccept} to do {Confirmationbase.uname} event  in Your Required Time and Requirements. [ThankYou]</Text>
             </View>
-
-            <TouchableOpacity>
-                <Text 
-                style={{fontSize: 20, 
-                fontWeight: "bold", 
-                backgroundColor: "#f47100", 
-                color: "white", 
-                height: 40, 
-                width: 100, 
-                padding: 5, 
-                marginTop: 5,
-                paddingLeft: 19,
-                marginLeft: 240
-                }}>Okaay</Text>
-            </TouchableOpacity>
-
              </View>       
          )})}  
 
@@ -64,7 +48,7 @@ const styles = StyleSheet.create({
         margin: -10
     },
     box :{
-        height: 190,
+        height: 150,
         width: '100%',
         borderColor: "black",
         borderWidth: 1,

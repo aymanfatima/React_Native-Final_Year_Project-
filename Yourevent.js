@@ -11,8 +11,8 @@ export default class ConfirmedEvent extends React.Component{
         name: '',
         cnic: '',
         uname: '',
-        newsdata1: [],
-        datas1: [],
+        databaseconfirm: [],
+        newsdataconfirm: [],
         Confirmationbase : {Confirmationbase: null},
     }
   }

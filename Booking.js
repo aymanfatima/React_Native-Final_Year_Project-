@@ -1,21 +1,9 @@
 import React from 'react';
-import {Text, StyleSheet, View, TouchableOpacity, FlatList} from 'react-native';
+import {Text, StyleSheet, View, TouchableOpacity} from 'react-native';
 import DropDownPicker from 'react-native-dropdown-picker';
 import {TextInput } from 'react-native-gesture-handler';
-import SelectMultiple from 'react-native-select-multiple';
 import * as firebase from 'firebase';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scrollview';
-
-const decoration = ['Balloons', 'Party Popper', 'Cake', 'Candle', 'Flowers', 'Disco Lights']
-
-const renderLabel = (label) => {
-  return (
-    <View style={{flexDirection: 'row', alignItems: 'center', height: 35, width: 200}}>
-        <Text style={{fontSize: 16, fontWeight: "400"}}>{label}</Text>
-      </View>
-  )
-}
-
 
 export default class Booking extends React.Component{
     constructor(props) {
@@ -30,21 +18,16 @@ export default class Booking extends React.Component{
             theme: "",
             area: "",
             guest: "",
-            selecteddecor: [],
+            requirementdecoration: "",
             newsdatas: [],
             datass: [],
             BookingArea: []
         }
       }
 
-      onSelectionsChange = (selecteddecor) =>{
-        this.setState({selecteddecor})
-      }
-   
 
-
-      validate_field = () => {
-        const {nameevent, nameuser, packages, location, datevent, month, year, hour, minutes, ampm, area, theme, guest, selecteddecor} = this.state;
+        validate_field = () => {
+        const {nameevent, nameuser, packages, location, datevent, month, year, hour, minutes, ampm, area, theme, guest, requirementdecoration} = this.state;
         if (nameevent == '') {
         alert('Enter Manager Name');
         return false;
@@ -97,8 +80,8 @@ export default class Booking extends React.Component{
         alert('Kindly enter number of guests');
         return false;
         }
-        else if ( selecteddecor== '') {  
-        alert('Kindly select decoration items');
+        else if ( requirementdecoration== '') {  
+        alert('Kindly fill decoration requirements');
         return false;
         }
         return true;
@@ -123,20 +106,20 @@ export default class Booking extends React.Component{
                   {              
           const Complains= firebase.database().ref("BookingArea");
           Complains.push({
-          ManagerName: this.state.nameevent,
-          UserName: this.state.nameuser,
-          MoneyPackage: this.state.packages,
-          PostalAddress: this.state.location,
-          DateOfEvent: this.state.datevent,
-          Month: this.state.month,
-          Year: this.state.year,
-          Hours: this.state.hour,
-          Minutes: this.state.minutes,
-          AMPM: this.state.ampm,
-          ThemeColor: this.state.theme,
-          area: this.state.area,
-          guest: this.state.guest,
-          selectedItem:this.state.selecteddecor
+            nameevent: this.state.nameevent,
+            nameuser: this.state.nameuser,
+            packages: this.state.packages,
+            location: this.state.location,
+            datevent: this.state.datevent,
+            month: this.state.month,
+            year: this.state.year,
+            hour: this.state.hour,
+            minutes: this.state.minutes,
+            ampm: this.state.ampm,
+            theme: this.state.theme,
+            area: this.state.area,
+            guest: this.state.guest,
+            requirementdecoration:this.state.requirementdecoration
           })       
          
           .catch(error => {
@@ -150,7 +133,7 @@ export default class Booking extends React.Component{
           this.state.packages = "",
           this.state.datevent = "",
           this.state.month = "",
-          this.state.selecteddecor = "",
+          this.state.requirementdecoration = "",
           this.state.guest = "",
           this.state.area = "",
           this.state.theme = "",
@@ -211,10 +194,13 @@ export default class Booking extends React.Component{
                 <DropDownPicker
                 items={[
                 {label: 'Less than 10k', value: 'Less than 10k',},
-                {label: '10k-20k', value: '10k-20k',},
-                {label: '20k-30k', value: '20k-30k',},
+                {label: '10k-15k', value: '10k-15k',},
+                {label: '15k-20k', value: '15k-20k',},
+                {label: '20k-25k', value: '20k-25k',},
+                {label: '25k-30k', value: '25k-30k',},
                 {label: '30k-40k', value: '30k-40k',},
                 {label: '40K above', value: '40K above',},
+                {label: '50K above', value: '50K above',},
                 ]}
                 dropDownStyle={{ marginTop: -5, borderColor: "grey"}}
                 style={{
@@ -518,7 +504,7 @@ export default class Booking extends React.Component{
             />
 
 
-            <Text style={{color: "blue", marginTop: 15, fontWeight: 'bold'}}>Enter Location (area) in Square.feets</Text>
+            <Text style={{color: "blue", marginTop: 15, fontWeight: 'bold'}}>Enter Location (area) in Yards</Text>
             <TextInput placeholderTextColor = "black"
               placeholder="Areaa" 
               style={{
@@ -551,16 +537,26 @@ export default class Booking extends React.Component{
 
 
         <Text style={{color: "black", marginLeft: 20, marginBottom:0, marginTop: 50,fontSize: 27, fontWeight: "bold"}}>DECORATION ITEMS</Text>
- 
-      
-        <SelectMultiple 
-        renderLabel={renderLabel}
-        items={decoration}
-        selectedItems={this.state.selecteddecor}
-        onSelectionsChange={this.onSelectionsChange}
-        />
-    
-    
+        
+        <Text style={{color: "blue", marginTop: 15, fontWeight: 'bold'}}>Enter Your Decoration items and requirements</Text>
+            <TextInput placeholderTextColor = "black"
+              placeholder="Decoration items and Requirements  Here!" 
+              underlineColorAndroid="transparent"
+              numberOfLines={10}
+              multiline={true}
+              style={{
+                height: 200,
+                borderColor: 'black',
+                borderWidth: 2,
+                width: 300,
+                alignItems: 'center',
+                paddingLeft: 20,
+                marginBottom: 20
+              }}
+              onChangeText={(requirementdecoration) => this.setState({ requirementdecoration })} value={this.state.requirementdecoration} 
+            />
+       
+
     <TouchableOpacity
           onPress={() => { this.making_api_call() }}
           style={{
@@ -599,7 +595,7 @@ const styles = StyleSheet.create({
         marginBottom: 0
     },
     secondContainer:{
-        height: 1440,
+        height: 1300,
         width: 380,
         borderColor: "orange",
         marginTop: 5,

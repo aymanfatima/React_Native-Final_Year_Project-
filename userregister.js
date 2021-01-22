@@ -9,8 +9,6 @@ import { MaterialCommunityIcons } from '@expo/vector-icons';
 import ValidationComponent from 'react-native-form-validator';
 import * as firebase from 'firebase';
 
-
-
 export default class userregister extends ValidationComponent {
     //CONTRUCTOR
     constructor(props) {
@@ -308,7 +306,7 @@ export default class userregister extends ValidationComponent {
 
 
                         <TouchableOpacity
-                            onPress={() => this.props.navigation.navigate('SignIn')}
+                            onPress={() => this.props.navigation.navigate('Application')}
                             style={{
                                 backgroundColor: "#f47100", height: 50, width: 280, padding: 10, margin: 0, justifyContent: "center", alignItems: "center", borderRadius: 20
                             }}>

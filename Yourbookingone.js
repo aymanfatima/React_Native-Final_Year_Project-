@@ -16,7 +16,7 @@ export default class YourBookings extends React.Component{
         theme: "",
         area: "",
         guest: "",
-        selecteddecor: [],
+        requirementdecoration: "",
         newsdatas: [],
         datass: [],
         BookingArea : {BookingArea: null},

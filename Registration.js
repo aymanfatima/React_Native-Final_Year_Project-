@@ -11,36 +11,21 @@ export default function Application({ navigation }) {
             }}>
 
                 <Image source={{ uri: 'https://github.com/aymanfatima/Python-s-Assignment-/blob/master/LOGO%20MAIN%201.png?raw=true' }}
-                    style={{ width: 160, height: 120, marginTop: 20 , marginBottom: 20}} />
+                    style={{ width: 185, height: 140, marginTop: 20 , marginBottom: 100}} />
 
                 <Text
-                style={{color: "black", fontSize: 30, fontWeight: "bold", textAlign: "center", 
-                marginLeft: 60, marginRight: 60, marginTop: 10
+                style={{color: "black", fontSize: 30, fontWeight: "bold", textAlign: "center", marginTop: 50
                 ,textShadowColor: "grey",
                 textShadowRadius: 15,
                 textShadowOffset: { width: 3, height: 8  }}}>
-                W E L C O M E   T O </Text>
+                CONTINUE SIGN IN AS...</Text>
 
-                <Text
-                style={{color: "black", fontSize: 30, fontWeight: "bold", textAlign: "center", 
-                marginLeft: 60, marginRight: 60, marginTop: 10
-                ,textShadowColor: "grey",
-                textShadowRadius: 15,
-                textShadowOffset: { width: 3, height: 8  }}}>
-                O U R</Text>
-
-                <Text
-                style={{color: "black", fontSize: 30, fontWeight: "bold", textAlign: "center", 
-                marginLeft: 60, marginRight: 60, marginTop: 10 ,textShadowColor: "grey",
-                textShadowRadius: 15,
-                textShadowOffset: { width: 3, height: 8  }}}>
-                A P P L I C A T I O N</Text>
 
                 <TouchableOpacity
-                    onPress={() => navigation.navigate('ManagerDashboard')}
+                    onPress={() => navigation.navigate('SignIn')}
                     style={{
-                        backgroundColor: "#f47100", height: 60, width: 300, padding: 10,
-                        margin: 20, justifyContent: "center", alignItems: "center", marginTop: 100
+                        backgroundColor: "#f47100", height: 60, width: 320, padding: 10,
+                        margin: 20, justifyContent: "center", alignItems: "center", marginTop: 10
                     }}>
                     <Text style={{ fontSize: 18, color: 'black', padding: 6 }}>
                         Continue As Event Manager</Text>
@@ -48,10 +33,10 @@ export default function Application({ navigation }) {
 
 
                 <TouchableOpacity
-                    onPress={() => navigation.navigate('CustomerDashboard')}
+                    onPress={() => navigation.navigate('UserSignIn')}
                     style={{
-                        backgroundColor: "#f47100", height: 60, width: 300, padding: 10,
-                        margin: 20, justifyContent: "center", alignItems: "center"
+                        backgroundColor: "#f47100", height: 60, width: 320, padding: 10,
+                        margin: 10, justifyContent: "center", alignItems: "center"
                     }}>
                     <Text style={{ fontSize: 18, color: 'black', padding: 6 }}>
                         Continue as Customer</Text>

@@ -27,8 +27,6 @@ export default class EventManager extends ValidationComponent {
       email: "",
       cnic: "",
       phone: "",
-      password: "",
-      secureTextEntry: true,
       IconName: 'eye',
       invalidname: "",
       invalidemail: "",
@@ -121,7 +119,7 @@ export default class EventManager extends ValidationComponent {
 
   // //VALIDATING EMPTY FIELDS
   validate_field = () => {
-    const { text, FirstName, LastName, password, email, cnic, phone, item1, item2, item3 } = this.state;
+    const { text, FirstName, LastName, email, cnic, phone, item1, item2, item3 } = this.state;
     if (FirstName == '') {
       alert('Kindly Fill Your First Name!');
       return false;
@@ -138,9 +136,6 @@ export default class EventManager extends ValidationComponent {
     }
     else if (cnic == '') {
       alert('Kindly Fill Your CNIC!');
-      return false;
-    } else if (password == '') {
-      alert('Kindly Fill Your Password!');
       return false;
     } else if (item1 == '') {
       alert('Kindly Select your Experience!');
@@ -235,7 +230,7 @@ export default class EventManager extends ValidationComponent {
         <View style={styles.container}>
           <View
             style={{
-              height: 1320,
+              height: 1240,
               width: 400,
               backgroundColor: 'white',
               alignItems: 'center',
@@ -246,7 +241,7 @@ export default class EventManager extends ValidationComponent {
               source={{
                 uri: 'https://cdn3.iconfinder.com/data/icons/user-roles/64/users-18-128.png',
               }}
-              style={{ width: 70, height: 70, marginTop: 10 }}
+              style={{ width: 70, height: 70, marginTop: 0}}
             />
             <Text
               style={{
@@ -383,29 +378,7 @@ export default class EventManager extends ValidationComponent {
               {this.state.invalidcnic}
             </Text>
 
-
-
-
-            <FontAwesome name="key" size={30} color="#f47100" style={styles.password} />
-            <TextInput placeholderTextColor = "black"
-              placeholder="Password"
-              style={{
-                height: 50,
-                borderColor: 'black',
-                borderWidth: 2,
-                width: 280,
-                alignItems: 'center',
-                paddingLeft: 55,
-                margin: 10,
-                borderRadius: 20,
-              }}
-              secureTextEntry={this.state.secureTextEntry}
-                onChangeText={(password) => this.setState({ password })} value={this.state.password} />
-            <TouchableOpacity onPress={this.onIconPress} style={styles.eyess}  >
-              <AntDesign name={this.state.IconName} size={24} color="black" />
-            </TouchableOpacity>
-
-  
+ 
             <Text
               style={{
                 alignItems: 'center',
@@ -558,7 +531,7 @@ export default class EventManager extends ValidationComponent {
                 height: 50,
                 width: "100%",
                 padding: 10,
-                marginTop: 60,
+                marginTop: 40,
                 justifyContent: 'center',
                 alignItems: 'center'
               }}>

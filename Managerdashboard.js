@@ -28,9 +28,9 @@ export default class ManagerDashboard extends React.Component {
 
             <View style={styles.main1}>
             {this.state.toggle ?  
-            this.props.navigation.navigate('CustomerDashboard') 
+            this.props.navigation.navigate('UserSignIn') 
             : <Text style={{textAlign: "center", justifyContent: "center",  fontSize: 17, fontStyle: "italic", padding: 5}}>
-            Switch to Customer Dashboard</Text> }
+            Switch to User Sign In</Text> }
 
             <Switch
             trackColor={{false: 'green', true: 'green'}}

@@ -23,45 +23,45 @@ export default class Yourbookingmain extends React.Component{
             
             <View style={styles.rowalign}>
             <Text style={{fontSize:18, fontWeight: 'bold'}}>Your Name:  </Text>
-            <Text style={{fontSize:18}}>{BookingArea.ManagerName}</Text>
+            <Text style={{fontSize:18}}>{BookingArea.nameevent}</Text>
             </View>
 
             <View style={styles.rowalign}>
             <Text style={{fontSize:18, fontWeight: 'bold'}}>Customer Name:  </Text>
-            <Text style={{fontSize:18}}>{BookingArea.UserName}</Text>
+            <Text style={{fontSize:18}}>{BookingArea.nameuser}</Text>
             </View>
 
             <View style={styles.rowalign}>
             <Text style={{fontSize:18, fontWeight: 'bold'}}>Customer Address:  </Text>
-            <Text style={{fontSize:18}}>{BookingArea.PostalAddress}</Text>
+            <Text style={{fontSize:18}}>{BookingArea.location}</Text>
             </View>
 
             <View style={styles.rowalign}>
             <Text style={{fontSize:18, fontWeight: 'bold'}}>Package:  </Text>
-            <Text style={{fontSize:18}}>{BookingArea.MoneyPackage}</Text>
+            <Text style={{fontSize:18}}>{BookingArea.packages}</Text>
             </View>
 
             <View style={styles.rowalign}>
             <Text style={{fontSize:18, fontWeight: 'bold'}}>Date:  </Text>
-            <Text style={{fontSize:18}}>{BookingArea.DateOfEvent}</Text>
+            <Text style={{fontSize:18}}>{BookingArea.datevent}</Text>
             <Text> - </Text>
-            <Text style={{fontSize:18}}>{BookingArea.Month}</Text>
+            <Text style={{fontSize:18}}>{BookingArea.month}</Text>
             <Text> - </Text>
-            <Text style={{fontSize:18}}>{BookingArea.Year}</Text>
+            <Text style={{fontSize:18}}>{BookingArea.year}</Text>
             </View>
 
             <View style={styles.rowalign}>
             <Text style={{fontSize:18, fontWeight: 'bold'}}>Timings:  </Text>
-            <Text style={{fontSize:18}}>{BookingArea.Hours}</Text>
+            <Text style={{fontSize:18}}>{BookingArea.hour}</Text>
             <Text style={{fontSize:18}}> (Hours)</Text>
-            <Text style={{fontSize:18}}>{BookingArea.Minutes}</Text>
+            <Text style={{fontSize:18}}>{BookingArea.minutes}</Text>
             <Text style={{fontSize:18}}> (Minutes) </Text>
-            <Text style={{fontSize:18}}>{BookingArea.AMPM}</Text>
+            <Text style={{fontSize:18}}>{BookingArea.ampm}</Text>
             </View>
 
             <View style={styles.rowalign}>
             <Text style={{fontSize:18, fontWeight: 'bold'}}>Theme Color:  </Text>
-            <Text style={{fontSize:18}}>{BookingArea.ThemeColor}</Text>
+            <Text style={{fontSize:18}}>{BookingArea.theme}</Text>
             </View>
 
             <View style={styles.rowalign}>
@@ -74,12 +74,11 @@ export default class Yourbookingmain extends React.Component{
             <Text style={{fontSize:18}}>{BookingArea.guest}</Text>
             </View>
 
-            {/* <View style={styles.rowalign}>
-            <Text style={{fontSize:18, fontWeight: 'bold'}}>Decoration items:  </Text>
-            <Text style={{fontSize:18}}>{BookingArea.selectedItem[Label]}</Text>
-            </View>  */}
+            <View style={styles.rowalign}>
+            <Text style={{fontSize:18, fontWeight: 'bold'}}>Customization:  </Text>
+            <Text style={{fontSize:18}}>{BookingArea.requirementdecoration}</Text>
+            </View>
 
-         
             <TouchableOpacity  
             onPress={() => {this.props.navigation.navigate('ConfirmationForm')}}>
                 <Text 
@@ -94,7 +93,8 @@ export default class Yourbookingmain extends React.Component{
                 paddingLeft: 10
                 }}>Accept/Reject</Text>
             </TouchableOpacity>
-
+         
+         
              </View>       
          )})}  
 
@@ -119,7 +119,7 @@ const styles = StyleSheet.create({
         margin: -10
     },
     box :{
-        height: 350,
+        height: 'auto',
         width: '100%',
         borderColor: "black",
         borderWidth: 1,

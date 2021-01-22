@@ -29,9 +29,9 @@ export default class CustomerDashboard extends React.Component {
             
             <View style={styles.main1}>
             {this.state.toggle ?  
-            this.props.navigation.navigate('ManagerDashboard') 
+            this.props.navigation.navigate('SignIn') 
             : <Text style={{textAlign: "center", justifyContent: "center",  fontSize: 17, fontStyle: "italic", padding: 5}}>
-            Switch to Manager Dashboard</Text> }
+            Switch to Manager Sign-In</Text> }
 
             <Switch
             trackColor={{false: 'green', true: 'green'}}
@@ -43,7 +43,7 @@ export default class CustomerDashboard extends React.Component {
             </View> 
 
             <TouchableOpacity
-                    onPress={() => this.props.navigation.navigate('SignIn')}
+                    onPress={() => this.props.navigation.navigate('UserSignIn')}
                     style={{
                         backgroundColor: "#f47100", height: 40, width: 95, position: 'absolute', right: -1, marginBottom: 10}}>
                     <Text style={{ fontSize: 13, color: 'black', fontWeight: "bold", padding: 8, paddingLeft: 10}}>

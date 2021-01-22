@@ -13,8 +13,8 @@ export default class ConfirmationForm extends React.Component{
             name: '',
             cnic: '',
             uname: '',
-            newsdata1: [],
-            datas1: [],
+            databaseconfirm: [],
+            newsdataconfirm: [],
             Confirmationbase: [], 
         }}
 
@@ -45,12 +45,14 @@ export default class ConfirmationForm extends React.Component{
 
 
     componentDidMount(){
-    let datas1 = firebase.database().ref("Confirmationbase");
-    datas1.on("value", snapshot => {
-    let newsdata1 = snapshot.val();
-    let Confirmationbase = Object.values(newsdata1);
-    this.setState({Confirmationbase});   })
-        }
+    let databaseconfirm = firebase.database().ref("Confirmationbase");
+    databaseconfirm.on("value", snapshot => {
+
+    let newsdataconfirm = snapshot.val();
+    let Confirmationbase = Object.values(newsdataconfirm);
+    this.setState({Confirmationbase});   
+        
+  })}
 
 
     
@@ -126,6 +128,7 @@ export default class ConfirmationForm extends React.Component{
             <TextInput placeholderTextColor = "black"
               placeholder="CNIC" 
               keyboardType="number-pad"
+              maxLength={13}
               style={{
                 height: 45,
                 borderColor: 'blue',
